@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Juan Sebastian Jaimes | Junior Developer — Backend &amp; Frontend</title>
+<meta name="description" content="Portafolio de Juan Sebastian Jaimes Rolon, Junior Developer enfocado en backend y frontend. Python, Java, JavaScript, SQL e inteligencia artificial.">
+<meta name="author" content="Juan Sebastian Jaimes Rolon">
+<meta name="theme-color" content="#050506">
+
+<!-- Open Graph / redes sociales -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Juan Sebastian Jaimes | Junior Developer">
+<meta property="og:description" content="Construyo ideas, las convierto en código y las transformo en experiencias digitales.">
+<meta property="og:image" content="assets/images/og-image.jpg">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icons/favicon.svg">
+
+<!-- Tipografías: Sora (títulos) · Outfit (interfaz) · JetBrains Mono (datos) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<a class="skip-link" href="#inicio">Saltar al contenido</a>
+
+<!-- Capa ambiental: rejilla fina + halo que sigue al cursor -->
+<div class="ambient" aria-hidden="true">
+  <div class="ambient__grid"></div>
+  <div class="ambient__glow" id="cursorGlow"></div>
+</div>
+
+
+<!-- ======================= NAVEGACIÓN ======================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+
+    <a class="logo" href="#inicio" aria-label="Inicio — Juan Sebastian Jaimes">
+      <span class="logo__mark">JSR</span>
+      <span class="logo__rule" aria-hidden="true"></span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Navegación principal">
+      <a href="#inicio"    class="nav__link is-active">Inicio</a>
+      <a href="#sobre-mi"  class="nav__link">Sobre mí</a>
+      <a href="#skills"    class="nav__link">Skills</a>
+      <a href="#proyectos" class="nav__link">Proyectos</a>
+      <a href="#formacion" class="nav__link">Formación</a>
+      <a href="#contacto"  class="nav__link">Contacto</a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+
+  </div>
+</header>
+
+
+<main>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero" id="inicio">
+  <div class="hero__inner">
+
+    <div class="hero__text">
+
+      <p class="eyebrow reveal" data-delay="0">
+        <span class="pulse" aria-hidden="true"></span>
+        Disponible para prácticas y primer empleo
+      </p>
+
+      <h1 class="hero__name reveal" data-delay="1">
+        Juan Sebastian
+        <em>Jaimes Rolon</em>
+      </h1>
+
+      <p class="hero__role reveal" data-delay="2">
+        Junior Developer <span aria-hidden="true">|</span> Backend &amp; Frontend
+      </p>
+
+      <p class="hero__claim reveal" data-delay="3">
+        Construyo ideas, las convierto en código y las transformo en
+        <span class="gold">experiencias digitales</span>.
+      </p>
+
+      <div class="hero__actions reveal" data-delay="4">
+        <a class="btn btn--gold" href="#proyectos">
+          Ver proyectos
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#contacto">Contactarme</a>
+        <a class="btn btn--quiet js-pending" href="#" data-pending="cv">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7l3.5 3.5L11.5 7M3 13h10"/></svg>
+          Descargar CV
+        </a>
+      </div>
+
+      <ul class="hero__stack reveal" data-delay="5">
+        <li>Python</li><li>Java</li><li>JavaScript</li><li>SQL</li><li>IA</li>
+      </ul>
+
+    </div>
+
+    <div class="hero__portrait reveal" data-delay="2">
+      <div class="portrait" data-parallax="0.06">
+        <div class="portrait__halo" aria-hidden="true"></div>
+        <div class="portrait__frame">
+          <picture>
+            <source srcset="assets/images/profile.webp" type="image/webp">
+            <img src="assets/images/profile.jpg"
+                 alt="Retrato de Juan Sebastian Jaimes Rolon"
+                 width="900" height="1200" fetchpriority="high">
+          </picture>
+          <span class="portrait__scrim" aria-hidden="true"></span>
+        </div>
+        <div class="portrait__tag portrait__tag--tl">
+          <span class="mono">EST. 2026</span>
+        </div>
+        <div class="portrait__tag portrait__tag--br">
+          <span class="dot dot--live" aria-hidden="true"></span> En formación activa
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a class="scrollcue" href="#sobre-mi" aria-label="Bajar a Sobre mí">
+    <span class="mono">SCROLL</span>
+    <span class="scrollcue__line" aria-hidden="true"></span>
+  </a>
+</section>
+
+
+<!-- ======================= SOBRE MÍ ======================= -->
+<section class="section" id="sobre-mi">
+  <div class="wrap">
+
+    <header class="shead reveal">
+      <span class="shead__num mono">01</span>
+      <h2 class="shead__title">Sobre mí</h2>
+      <span class="shead__rule" aria-hidden="true"></span>
+    </header>
+
+    <p class="lead reveal">
+      Desarrollador en formación, estudiando programación y construyendo proyectos reales.
+      Me mueve el <span class="gold">frontend y el backend</span> por igual: la interfaz que se ve
+      y la lógica que la sostiene. Aprender tecnologías nuevas es la parte que más disfruto.
+    </p>
+
+    <ul class="stats">
+      <li class="stat reveal" data-delay="0"><b>18+</b><span>Años</span></li>
+      <li class="stat reveal" data-delay="1"><b>Developer</b><span>En formación</span></li>
+      <li class="stat reveal" data-delay="2"><b>B1</b><span>Inglés</span></li>
+      <li class="stat reveal" data-delay="3"><b class="inf">∞</b><span>Ganas de aprender</span></li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ======================= STACK ======================= -->
+<section class="section" id="skills">
+  <div class="wrap">
+
+    <header class="shead reveal">
+      <span class="shead__num mono">02</span>
+      <h2 class="shead__title">Stack tecnológico</h2>
+      <span class="shead__rule" aria-hidden="true"></span>
+    </header>
+
+    <div class="legend reveal">
+      <span><i class="dot dot--own" aria-hidden="true"></i> Manejo</span>
+      <span><i class="dot dot--learn" aria-hidden="true"></i> Aprendiendo</span>
+    </div>
+
+    <ul class="grid-tech">
+      <li class="tech reveal" data-delay="0"><span class="tech__i mono">01</span><span class="tech__sym">Py</span><span class="tech__name">Python</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="1"><span class="tech__i mono">02</span><span class="tech__sym">Jv</span><span class="tech__name">Java</span><span class="tech__st is-learn">Aprendiendo</span></li>
+      <li class="tech reveal" data-delay="2"><span class="tech__i mono">03</span><span class="tech__sym">Ht</span><span class="tech__name">HTML</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="3"><span class="tech__i mono">04</span><span class="tech__sym">Cs</span><span class="tech__name">CSS</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="4"><span class="tech__i mono">05</span><span class="tech__sym">Js</span><span class="tech__name">JavaScript</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="5"><span class="tech__i mono">06</span><span class="tech__sym">Sq</span><span class="tech__name">SQL</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="6"><span class="tech__i mono">07</span><span class="tech__sym">My</span><span class="tech__name">MySQL</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="7"><span class="tech__i mono">08</span><span class="tech__sym">Gi</span><span class="tech__name">Git</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="8"><span class="tech__i mono">09</span><span class="tech__sym">Gh</span><span class="tech__name">GitHub</span><span class="tech__st is-own">Manejo</span></li>
+      <li class="tech reveal" data-delay="9"><span class="tech__i mono">10</span><span class="tech__sym">Ai</span><span class="tech__name">Inteligencia Artificial</span><span class="tech__st is-learn">Aprendiendo</span></li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ======================= PROYECTOS ======================= -->
+<section class="section" id="proyectos">
+  <div class="wrap">
+
+    <header class="shead reveal">
+      <span class="shead__num mono">03</span>
+      <h2 class="shead__title">Proyectos</h2>
+      <span class="shead__rule" aria-hidden="true"></span>
+    </header>
+
+    <div class="grid-proj">
+
+      <article class="proj reveal" data-delay="0">
+        <div class="proj__visual">
+          <img src="assets/images/proyecto-1.jpg" alt="" class="proj__img" decoding="async" onload="this.style.opacity=1" onerror="this.remove()">
+          <div class="proj__mock" aria-hidden="true">
+            <div class="chrome"><i></i><i></i><i></i></div>
+            <div class="mock mock--term"><em>&gt; python prestamos.py</em><em>&gt; herramienta registrada</em><em>&gt; _</em></div>
+          </div>
+        </div>
+        <div class="proj__body">
+          <h3 class="proj__name">Préstamo de Herramientas</h3>
+          <ul class="proj__tags"><li>Python</li></ul>
+          <p class="proj__desc">Sistema comunitario para registrar el préstamo<br>y la devolución de herramientas.</p>
+          <div class="proj__links">
+            <a class="lnk js-pending" href="#" data-pending="demo-1">Ver proyecto</a>
+            <a class="lnk lnk--alt" href="https://github.com/sebastianjaimesr" target="_blank" rel="noopener noreferrer">
+              GitHub
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj reveal" data-delay="1">
+        <div class="proj__visual">
+          <img src="assets/images/proyecto-2.jpg" alt="" class="proj__img" decoding="async" onload="this.style.opacity=1" onerror="this.remove()">
+          <div class="proj__mock" aria-hidden="true">
+            <div class="chrome"><i></i><i></i><i></i></div>
+            <div class="mock mock--shop"><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="proj__body">
+          <h3 class="proj__name">Reservas de Salas</h3>
+          <ul class="proj__tags"><li>Scrum</li></ul>
+          <p class="proj__desc">Mini sistema de reserva de salas y aulas,<br>desarrollado con metodología ágil.</p>
+          <div class="proj__links">
+            <a class="lnk js-pending" href="#" data-pending="demo-2">Ver proyecto</a>
+            <a class="lnk lnk--alt" href="https://github.com/sebastianjaimesr" target="_blank" rel="noopener noreferrer">
+              GitHub
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj reveal" data-delay="2">
+        <div class="proj__visual">
+          <img src="assets/images/proyecto-3.jpg" alt="" class="proj__img" decoding="async" onload="this.style.opacity=1" onerror="this.remove()">
+          <div class="proj__mock" aria-hidden="true">
+            <div class="chrome"><i></i><i></i><i></i></div>
+            <div class="mock mock--landing"><b></b><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="proj__body">
+          <h3 class="proj__name">Space Rides</h3>
+          <ul class="proj__tags"><li>HTML</li><li>CSS</li></ul>
+          <p class="proj__desc">Página web UberX · SpaceX · Space Rides.<br>Maquetación semántica y diseño responsive.</p>
+          <div class="proj__links">
+            <a class="lnk js-pending" href="#" data-pending="demo-3">Ver proyecto</a>
+            <a class="lnk lnk--alt" href="https://github.com/sebastianjaimesr" target="_blank" rel="noopener noreferrer">
+              GitHub
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================= FORMACIÓN ======================= -->
+<section class="section" id="formacion">
+  <div class="wrap">
+
+    <header class="shead reveal">
+      <span class="shead__num mono">04</span>
+      <h2 class="shead__title">Formación</h2>
+      <span class="shead__rule" aria-hidden="true"></span>
+    </header>
+
+    <ol class="timeline">
+      <li class="tl reveal" data-delay="0">
+        <span class="tl__dot tl__dot--live" aria-hidden="true"></span>
+        <span class="tl__when mono">ENE — NOV 2026 · EN CURSO</span>
+        <h3 class="tl__what">Técnico Laboral en Desarrollo de Software</h3>
+        <p class="tl__where">Campuslands · Floridablanca</p>
+      </li>
+      <li class="tl reveal" data-delay="1">
+        <span class="tl__dot tl__dot--live" aria-hidden="true"></span>
+        <span class="tl__when mono">2025 — ACTUALIDAD · EN CURSO</span>
+        <h3 class="tl__what">Inglés — Nivel B1</h3>
+        <p class="tl__where">Academia Praxis · Formación básico-intermedio</p>
+      </li>
+      <li class="tl reveal" data-delay="2">
+        <span class="tl__dot" aria-hidden="true"></span>
+        <span class="tl__when mono">CURSO VIRTUAL</span>
+        <h3 class="tl__what">Automatización de procesos</h3>
+        <p class="tl__where">Automatización con herramientas de programación</p>
+      </li>
+      <li class="tl reveal" data-delay="3">
+        <span class="tl__dot" aria-hidden="true"></span>
+        <span class="tl__when mono">CERTIFICADO</span>
+        <h3 class="tl__what">Técnico en Gestión Empresarial</h3>
+        <p class="tl__where">Formación en administración y procesos</p>
+      </li>
+      <li class="tl reveal" data-delay="4">
+        <span class="tl__dot" aria-hidden="true"></span>
+        <span class="tl__when mono">BACHILLER</span>
+        <h3 class="tl__what">Educación media</h3>
+        <p class="tl__where">Colegio Cooperativo Comfenalco</p>
+      </li>
+    </ol>
+
+  </div>
+</section>
+
+
+<!-- ======================= APRENDIENDO ======================= -->
+<section class="section section--tight" id="aprendiendo">
+  <div class="wrap">
+
+    <header class="shead reveal">
+      <span class="shead__num mono">05</span>
+      <h2 class="shead__title">Actualmente aprendiendo</h2>
+      <span class="shead__rule" aria-hidden="true"></span>
+    </header>
+
+    <ul class="learning">
+      <li class="reveal" data-delay="0">Java</li>
+      <li class="reveal" data-delay="1">Inglés</li>
+      <li class="reveal" data-delay="2">Desarrollo Backend</li>
+      <li class="reveal" data-delay="3">Desarrollo Frontend</li>
+      <li class="reveal" data-delay="4">Bases de datos</li>
+      <li class="reveal" data-delay="5">Inteligencia Artificial</li>
+      <li class="reveal" data-delay="6">Buenas prácticas de programación</li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ======================= CONTACTO ======================= -->
+<section class="section contact" id="contacto">
+  <div class="wrap">
+
+    <h2 class="contact__title reveal">¿Construimos <em>algo juntos</em>?</h2>
+    <p class="contact__text reveal">Estoy abierto a nuevas oportunidades, proyectos y colaboraciones.</p>
+
+    <div class="channels">
+
+      <a class="ch reveal" data-delay="0" href="mailto:jsrolon01@gmail.com">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <span class="ch__k mono">EMAIL</span>
+        <span class="ch__v">jsrolon01@gmail.com</span>
+      </a>
+
+      <a class="ch reveal" data-delay="1" href="https://github.com/sebastianjaimesr" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.3-4-2.2-6-2.7m12 5.4v-3.4a3 3 0 0 0-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.5 3.3 5.5 3.6 5.5 3.6a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 10c0 4.7 2.8 5.7 5.5 6a3 3 0 0 0-.8 2.3v3.4"/></svg>
+        <span class="ch__k mono">GITHUB</span>
+        <span class="ch__v">@sebastianjaimesr</span>
+      </a>
+
+      <a class="ch js-pending reveal" data-delay="2" href="#" data-pending="linkedin">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4"/></svg>
+        <span class="ch__k mono">LINKEDIN</span>
+        <span class="ch__v">Sebastian Jaimes</span>
+      </a>
+
+      <a class="ch ch--cta js-pending reveal" data-delay="3" href="#" data-pending="cv">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg>
+        <span class="ch__k mono">CURRÍCULUM</span>
+        <span class="ch__v">Descargar CV</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <span class="logo__mark">JSR</span>
+    <p class="mono">© <span id="year">2026</span> Juan Sebastian Jaimes Rolon</p>
+    <p class="mono foot__built">HTML · CSS · JavaScript</p>
+  </div>
+</footer>
+
+
+<!-- Aviso para enlaces aún no configurados -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
