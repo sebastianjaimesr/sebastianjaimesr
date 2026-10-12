@@ -47,6 +47,7 @@ const en = {
     index: '01',
     kicker: 'About me',
     title: 'Building My Path in Technology.',
+    photoAlt: 'Portrait of Sebastian Jaimes smiling, wearing a dark suit and tie',
     body: "I'm a Full-Stack Developer in training who enjoys understanding how digital products work from end to end: interfaces, application logic, databases, and automation. I'm focused on learning through practical projects, improving my problem-solving skills, and building digital experiences that are useful, maintainable, and thoughtfully designed.",
     facts: {
       based: 'Based in',
@@ -205,6 +206,7 @@ const es: Dictionary = {
     index: '01',
     kicker: 'Sobre mí',
     title: 'Construyendo mi camino en tecnología.',
+    photoAlt: 'Retrato de Sebastian Jaimes sonriendo, con traje oscuro y corbata',
     body: 'Soy desarrollador Full-Stack en formación y me interesa comprender cómo funcionan los productos digitales de principio a fin: interfaces, lógica de aplicaciones, bases de datos y automatización. Me enfoco en aprender mediante proyectos prácticos, mejorar mis habilidades para resolver problemas y construir experiencias digitales útiles, mantenibles y bien diseñadas.',
     facts: {
       based: 'Ubicado en',

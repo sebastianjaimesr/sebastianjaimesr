@@ -1167,6 +1167,100 @@ html.is-switching-lang .nav__links {
   gap: 8px;
 }
 
+.about {
+  /* The portrait's orbit ring may extend past narrow screens. */
+  overflow-x: clip;
+}
+
+.about__intro {
+  display: grid;
+  align-content: start;
+}
+
+/* Portrait: gradient-edged frame with an orbit ring passing behind it. */
+.portrait {
+  position: relative;
+  width: min(100%, 280px);
+  margin: 0 0 32px;
+  padding: 1px;
+  border-radius: 28px;
+  background: linear-gradient(150deg, rgba(124, 157, 255, 0.75), rgba(177, 140, 255, 0.2) 45%, rgba(161, 243, 220, 0.55));
+  box-shadow: 0 40px 90px -40px rgba(124, 157, 255, 0.55);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.portrait__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 27px;
+  background: var(--bg-2);
+}
+
+.portrait__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portrait__frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 52%, rgba(7, 9, 16, 0.88)),
+    radial-gradient(120% 70% at 100% 0%, rgba(124, 157, 255, 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.portrait__tag {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+  z-index: 1;
+  display: grid;
+  gap: 2px;
+}
+
+.portrait__tag strong {
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.portrait__tag span {
+  color: var(--mint);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.portrait__orbit {
+  position: absolute;
+  left: -16%;
+  right: -16%;
+  top: 34%;
+  height: 34%;
+  z-index: -1;
+  border: 1px solid rgba(161, 243, 220, 0.32);
+  border-radius: 50%;
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+.portrait__satellite {
+  position: absolute;
+  top: 50%;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 12px rgba(161, 243, 220, 0.9);
+}
+
 .about__lead {
   font-size: clamp(18px, 2vw, 23px);
   line-height: 1.6;
@@ -1280,6 +1374,10 @@ html.is-switching-lang .nav__links {
   }
   .about__body {
     padding-top: 52px;
+  }
+  .portrait {
+    width: min(100%, 320px);
+    margin-top: -8px;
   }
   .themes {
     grid-template-columns: repeat(4, minmax(0, 1fr));
