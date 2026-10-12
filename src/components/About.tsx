@@ -1,7 +1,7 @@
 import { Database, Globe, Layers, Workflow } from 'lucide-react'
 import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
-import { trackSpotlight } from '../lib/spotlight'
+import { resetTilt, trackSpotlight } from '../lib/spotlight'
 import { SectionHeading } from './SectionHeading'
 
 const THEME_ICONS = [Layers, Database, Workflow, Globe]
@@ -43,7 +43,7 @@ export function About() {
           {a.themes.map((theme, i) => {
             const Icon = THEME_ICONS[i]
             return (
-              <li key={i} className="theme card spotlight" data-reveal onPointerMove={trackSpotlight}>
+              <li key={i} className="theme card spotlight tilt" data-reveal onPointerMove={trackSpotlight} onPointerLeave={resetTilt}>
                 <div className="theme__top">
                   <span className="theme__icon" aria-hidden="true">
                     <Icon size={20} strokeWidth={1.6} />

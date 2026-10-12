@@ -2,7 +2,7 @@ import { ArrowUpRight, Check, Copy, FileDown, Mail, MessageCircle } from 'lucide
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { mailtoHref, site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
-import { trackSpotlight } from '../lib/spotlight'
+import { resetTilt, trackSpotlight } from '../lib/spotlight'
 import { GitHubIcon, LinkedInIcon } from './Icons'
 import { SectionHeading } from './SectionHeading'
 
@@ -79,9 +79,10 @@ export function Contact() {
           {channels.map((channel) => (
             <li key={channel.key} data-reveal>
               <a
-                className="channel card spotlight"
+                className="channel card spotlight tilt"
                 href={channel.href}
                 onPointerMove={trackSpotlight}
+                onPointerLeave={resetTilt}
                 {...(channel.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 <span className="channel__icon">{channel.icon}</span>

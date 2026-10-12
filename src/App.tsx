@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react'
 import { About } from './components/About'
 import { Approach } from './components/Approach'
 import { Contact } from './components/Contact'
@@ -5,13 +6,18 @@ import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
 import { Projects } from './components/Projects'
+import { SceneLayer, type SceneStatus } from './components/SceneLayer'
 import { Skills } from './components/Skills'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useLanguage } from './i18n/LanguageContext'
+import { isWebGLAvailable } from './lib/webgl'
 
 export default function App() {
   const { t } = useLanguage()
   useScrollReveal()
+  const [sceneStatus, setSceneStatus] = useState<SceneStatus>(() => (isWebGLAvailable() ? 'loading' : 'failed'))
+  const handleReady = useCallback(() => setSceneStatus('ready'), [])
+  const handleFailure = useCallback(() => setSceneStatus('failed'), [])
 
   return (
     <>
@@ -24,9 +30,10 @@ export default function App() {
         <span className="backdrop__grid" />
         <span className="backdrop__noise" />
       </div>
+      <SceneLayer status={sceneStatus} onReady={handleReady} onFailure={handleFailure} />
       <Navbar />
       <main id="main" tabIndex={-1}>
-        <Hero />
+        <Hero sceneStatus={sceneStatus} />
         <About />
         <Skills />
         <Projects />

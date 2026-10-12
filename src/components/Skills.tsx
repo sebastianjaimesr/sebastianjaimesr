@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { showUnconfirmedSkills, skillCategories, skills, type SkillCategory } from '../data/skills'
 import { useLanguage } from '../i18n/LanguageContext'
-import { trackSpotlight } from '../lib/spotlight'
+import { resetTilt, trackSpotlight } from '../lib/spotlight'
 import { SectionHeading } from './SectionHeading'
 
 type Filter = SkillCategory | 'all'
@@ -44,9 +44,10 @@ export function Skills() {
           {filtered.map((skill, i) => (
             <li
               key={`${filter}-${skill.name}`}
-              className="skill card spotlight"
+              className="skill card spotlight tilt"
               style={{ ['--i' as string]: i }}
               onPointerMove={trackSpotlight}
+              onPointerLeave={resetTilt}
             >
               <span className={`skill__glyph mono skill__glyph--${skill.category}`} aria-hidden="true">
                 {skill.glyph}
