@@ -57,6 +57,25 @@ const atmosphereFragment = /* glsl */ `
   }
 `
 
+/** Primary and secondary colours per section; the journey blends between neighbours. */
+const PALETTES: [string, string][] = [
+  ['#7C9DFF', '#B18CFF'], // hero
+  ['#A1F3DC', '#7C9DFF'], // about
+  ['#B18CFF', '#7C9DFF'], // skills
+  ['#7C9DFF', '#A1F3DC'], // projects
+  ['#C9D4FF', '#B18CFF'], // approach
+  ['#A1F3DC', '#B18CFF'], // contact
+]
+const PALETTE_COLORS = PALETTES.map(([a, b]) => [new THREE.Color(a), new THREE.Color(b)] as const)
+
+function blendPalette(tint: number, primary: THREE.Color, secondary: THREE.Color) {
+  const i = Math.min(PALETTES.length - 1, Math.max(0, Math.floor(tint)))
+  const j = Math.min(PALETTES.length - 1, i + 1)
+  const t = Math.min(1, Math.max(0, tint - i))
+  primary.copy(PALETTE_COLORS[i][0]).lerp(PALETTE_COLORS[j][0], t)
+  secondary.copy(PALETTE_COLORS[i][1]).lerp(PALETTE_COLORS[j][1], t)
+}
+
 const RINGS = [
   { radius: 1.72, tube: 0.006, rotation: [1.18, 0.22, 0] as const, color: '#7C9DFF', opacity: 0.75, speed: 0.22, satellite: '#A1F3DC' },
   { radius: 2.08, tube: 0.0045, rotation: [1.86, -0.42, 0.3] as const, color: '#B18CFF', opacity: 0.55, speed: -0.15, satellite: '#B18CFF' },
@@ -70,7 +89,23 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
   const shell = useRef<THREE.LineSegments>(null)
   const dust = useRef<THREE.Points>(null)
   const ringGroups = useRef<(THREE.Group | null)[]>([])
-  const motion = useRef({ px: 0, py: 0, scroll: 0, spin: 0, hover: 0, hovering: false })
+  const ringMaterials = useRef<(THREE.MeshBasicMaterial | null)[]>([])
+  const shellMaterial = useRef<THREE.LineBasicMaterial>(null)
+  const glowMaterial = useRef<THREE.SpriteMaterial>(null)
+  const motion = useRef({
+    px: 0,
+    py: 0,
+    x: sceneState.anchor.x,
+    y: sceneState.anchor.y,
+    size: sceneState.anchor.size,
+    tint: sceneState.tint,
+    page: 0,
+    spin: 0,
+    hover: 0,
+    hovering: false,
+    primary: new THREE.Color(),
+    secondary: new THREE.Color(),
+  })
 
   const detail = DETAIL[tier]
   const dustCount = DUST_COUNT[tier]
@@ -98,10 +133,11 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
       [1, 'rgba(255,255,255,0)'],
     ])
     const glow = createRadialTexture(256, [
-      [0, 'rgba(124,157,255,0.55)'],
-      [0.35, 'rgba(120,110,255,0.22)'],
-      [0.7, 'rgba(177,140,255,0.06)'],
-      [1, 'rgba(177,140,255,0)'],
+      // Neutral glow, tinted per section through the sprite material colour.
+      [0, 'rgba(225,232,255,0.55)'],
+      [0.35, 'rgba(210,214,255,0.22)'],
+      [0.7, 'rgba(220,210,255,0.06)'],
+      [1, 'rgba(220,210,255,0)'],
     ])
     const atmosphere = new THREE.ShaderMaterial({
       vertexShader: atmosphereVertex,
@@ -147,26 +183,37 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
 
     m.px += (sceneState.pointer.x - m.px) * follow
     m.py += (sceneState.pointer.y - m.py) * follow
-    m.scroll += (sceneState.scroll - m.scroll) * follow
+    // The anchor moves with scroll; a slightly slower follow makes the glide feel weighty.
+    const glide = 1 - Math.exp(-d * (reducedMotion ? 30 : 4.5))
+    const anchor = sceneState.anchor
+    m.x += (anchor.x - m.x) * glide
+    m.y += (anchor.y - m.y) * glide
+    m.size += (anchor.size - m.size) * glide
+    m.tint += (sceneState.tint - m.tint) * glide
+    m.page += (sceneState.page - m.page) * glide
     m.hover += ((m.hovering ? 1 : 0) - m.hover) * (1 - Math.exp(-d * 6))
     m.spin *= Math.exp(-d * 1.6)
 
-    // Fit the sculpture to the DOM stage measured by the hero.
+    // Place the sculpture where the scroll journey says, in viewport units.
     const { width, height } = state.viewport
-    const anchor = sceneState.anchor
-    const fit = (anchor.size * height) / OUTER_DIAMETER
+    const fit = (m.size * height) / OUTER_DIAMETER
     const parallax = reducedMotion ? 0 : 1
     const since = (performance.now() - sceneState.pulseAt) / 1000
     const pulse = !reducedMotion && since < 1.1 ? Math.sin((since / 1.1) * Math.PI) * 0.045 : 0
 
-    g.position.set(
-      (anchor.x * width) / 2 + m.px * 0.18 * parallax,
-      (anchor.y * height) / 2 + m.py * 0.12 * parallax + m.scroll * height * 0.22,
-      0,
-    )
-    g.scale.setScalar(fit * (1 - m.scroll * 0.18) * (1 + pulse + m.hover * 0.02))
-    g.rotation.x = -m.py * 0.22 * parallax + m.scroll * 0.7
-    g.rotation.y = m.px * 0.35 * parallax
+    g.position.set((m.x * width) / 2 + m.px * 0.18 * parallax, (m.y * height) / 2 + m.py * 0.12 * parallax, 0)
+    g.scale.setScalar(fit * (1 + pulse + m.hover * 0.02))
+    g.rotation.x = -m.py * 0.22 * parallax + m.page * 1.4 * parallax
+    g.rotation.y = m.px * 0.35 * parallax + m.page * Math.PI * 2 * parallax
+
+    // Section colours: rings, shell, atmosphere and glow.
+    blendPalette(m.tint, m.primary, m.secondary)
+    ringMaterials.current[0]?.color.copy(m.primary)
+    ringMaterials.current[1]?.color.copy(m.secondary)
+    shellMaterial.current?.color.copy(m.primary)
+    glowMaterial.current?.color.copy(m.primary)
+    resources.atmosphere.uniforms.uColorA.value.copy(m.primary)
+    resources.atmosphere.uniforms.uColorB.value.copy(m.secondary)
 
     const auto = reducedMotion ? 0 : 1
     if (core.current) {
@@ -186,7 +233,7 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
       material.current.iridescence = 0.55 + m.hover * 0.35
       material.current.envMapIntensity = 1.15 + m.hover * 0.35 + pulse * 4
     }
-    if (reducedMotion && (Math.abs(sceneState.pointer.x - m.px) > 0.001 || Math.abs(sceneState.scroll - m.scroll) > 0.001)) {
+    if (reducedMotion && (Math.abs(anchor.y - m.y) > 0.0005 || Math.abs(sceneState.pointer.x - m.px) > 0.001)) {
       state.invalidate()
     }
   })
@@ -208,7 +255,7 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
   return (
     <group ref={group}>
       <sprite scale={6.2} renderOrder={-1}>
-        <spriteMaterial map={resources.glow} transparent depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
+        <spriteMaterial ref={glowMaterial} map={resources.glow} transparent depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
       </sprite>
 
       <mesh ref={core} geometry={resources.sculpture} onPointerDown={handlePointerDown} onPointerOver={handleOver} onPointerOut={handleOut}>
@@ -231,7 +278,7 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
       </mesh>
 
       <lineSegments ref={shell} geometry={resources.shellEdges}>
-        <lineBasicMaterial color="#7C9DFF" transparent opacity={0.16} depthWrite={false} toneMapped={false} />
+        <lineBasicMaterial ref={shellMaterial} color="#7C9DFF" transparent opacity={0.16} depthWrite={false} toneMapped={false} />
       </lineSegments>
 
       {RINGS.map((ring, i) => (
@@ -239,7 +286,10 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
           <group ref={(el) => void (ringGroups.current[i] = el)}>
             <mesh>
               <torusGeometry args={[ring.radius, ring.tube, 8, 220]} />
-              <meshBasicMaterial color={ring.color} transparent opacity={ring.opacity} depthWrite={false} toneMapped={false} />
+              <meshBasicMaterial
+                ref={(el) => void (ringMaterials.current[i] = el)}
+                color={ring.color}
+                transparent opacity={ring.opacity} depthWrite={false} toneMapped={false} />
             </mesh>
             {ring.satellite && (
               <mesh position={[ring.radius, 0, 0]}>

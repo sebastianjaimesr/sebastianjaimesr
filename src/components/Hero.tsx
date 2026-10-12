@@ -1,95 +1,18 @@
 import { ArrowDownRight, MapPin } from 'lucide-react'
-import { Suspense, lazy, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { site } from '../data/site'
-import { useReducedMotion } from '../hooks/useMediaQuery'
 import { useLanguage } from '../i18n/LanguageContext'
 import { gsap } from '../lib/gsap'
-import { sceneState } from '../lib/sceneState'
-import { getQualityTier, isWebGLAvailable } from '../lib/webgl'
-import { ErrorBoundary } from './ErrorBoundary'
+import type { SceneStatus } from './SceneLayer'
 
-// The 3D scene (three.js + R3F) is split into its own chunk so text paints first.
-const Scene3D = lazy(() => import('./scene/Scene3D'))
+interface HeroProps {
+  /** State of the shared 3D layer; the CSS orb stands in until it is ready. */
+  sceneStatus: SceneStatus
+}
 
-type SceneStatus = 'loading' | 'ready' | 'failed'
-
-export function Hero() {
+export function Hero({ sceneStatus: status }: HeroProps) {
   const { t } = useLanguage()
-  const reducedMotion = useReducedMotion()
   const heroRef = useRef<HTMLElement>(null)
-  const stageRef = useRef<HTMLDivElement>(null)
-  const [status, setStatus] = useState<SceneStatus>(() => (isWebGLAvailable() ? 'loading' : 'failed'))
-  const [active, setActive] = useState(true)
-  const tier = useMemo(getQualityTier, [])
-
-  const handleReady = useCallback(() => setStatus('ready'), [])
-  const handleFailure = useCallback(() => setStatus('failed'), [])
-
-  // Measure where the sculpture should sit (the stage element) relative to the hero/canvas.
-  useEffect(() => {
-    const hero = heroRef.current
-    const stage = stageRef.current
-    if (!hero || !stage) return
-    const measure = () => {
-      const h = hero.getBoundingClientRect()
-      const s = stage.getBoundingClientRect()
-      if (!h.width || !h.height) return
-      const cx = s.left + s.width / 2 - h.left
-      const cy = s.top + s.height / 2 - h.top
-      sceneState.anchor.x = (cx / h.width) * 2 - 1
-      sceneState.anchor.y = -((cy / h.height) * 2 - 1)
-      sceneState.anchor.size = Math.min(s.width, s.height) / h.height
-      sceneState.anchor.ready = true
-    }
-    measure()
-    const observer = new ResizeObserver(measure)
-    observer.observe(hero)
-    observer.observe(stage)
-    window.addEventListener('resize', measure)
-    return () => {
-      observer.disconnect()
-      window.removeEventListener('resize', measure)
-    }
-  }, [])
-
-  // Pointer parallax (mouse and touch) and scroll progress, written to shared state without re-rendering.
-  useEffect(() => {
-    const hero = heroRef.current
-    if (!hero) return
-    const onPointer = (event: PointerEvent) => {
-      sceneState.pointer.x = (event.clientX / window.innerWidth) * 2 - 1
-      sceneState.pointer.y = -((event.clientY / window.innerHeight) * 2 - 1)
-    }
-    const onScroll = () => {
-      const height = hero.offsetHeight || window.innerHeight
-      sceneState.scroll = Math.min(1, Math.max(0, window.scrollY / height))
-    }
-    onScroll()
-    window.addEventListener('pointermove', onPointer, { passive: true })
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('pointermove', onPointer)
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
-
-  // Pause the render loop when the hero is off screen or the tab is hidden.
-  useEffect(() => {
-    const hero = heroRef.current
-    if (!hero) return
-    let visible = true
-    const update = () => setActive(visible && document.visibilityState === 'visible')
-    const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting
-      update()
-    })
-    io.observe(hero)
-    document.addEventListener('visibilitychange', update)
-    return () => {
-      io.disconnect()
-      document.removeEventListener('visibilitychange', update)
-    }
-  }, [])
 
   // Staggered entrance and scroll-linked fade of the hero copy.
   useLayoutEffect(() => {
@@ -118,16 +41,6 @@ export function Hero() {
 
   return (
     <section id="home" className="hero" ref={heroRef} aria-labelledby="hero-title">
-      <div className={`hero__canvas${status === 'ready' ? ' is-ready' : ''}`}>
-        {status !== 'failed' && (
-          <ErrorBoundary fallback={null} onError={handleFailure}>
-            <Suspense fallback={null}>
-              <Scene3D tier={tier} reducedMotion={reducedMotion} active={active} onReady={handleReady} onContextLost={handleFailure} />
-            </Suspense>
-          </ErrorBoundary>
-        )}
-      </div>
-
       <div className="container hero__grid">
         <div className="hero__copy">
           <p className="hero__eyebrow mono" data-hero>
@@ -166,7 +79,7 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="hero__stage" ref={stageRef} role="img" aria-label={t.hero.sceneLabel}>
+        <div className="hero__stage" role="img" aria-label={t.hero.sceneLabel}>
           {status !== 'ready' && <div className={`orb-fallback${status === 'failed' ? ' is-static' : ''}`} aria-hidden="true" />}
           <ul className="hero__labels mono" aria-hidden="true">
             <li className="hero__label hero__label--a" data-hero-label>

@@ -80,7 +80,8 @@ sebastian-portfolio/
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.tsx             sticky nav, active section, scroll progress, mobile menu, language toggle
-│   │   ├── Hero.tsx               intro, CTAs, floating labels, lazy 3D scene + fallbacks
+│   │   ├── Hero.tsx               intro, CTAs, floating labels, CSS fallback orb
+│   │   ├── SceneLayer.tsx         fixed full-page layer that lazy-loads the 3D scene
 │   │   ├── scene/
 │   │   │   ├── Scene3D.tsx        <Canvas>, lights, render-loop control
 │   │   │   ├── Sculpture.tsx      displaced iridescent orb, wireframe shell, orbital rings, dust
@@ -92,7 +93,7 @@ sebastian-portfolio/
 │   │   ├── Approach.tsx  Contact.tsx  Footer.tsx
 │   │   ├── SectionHeading.tsx  Icons.tsx  ErrorBoundary.tsx
 │   ├── data/                      editable content (see above)
-│   ├── hooks/                     useMediaQuery / useReducedMotion, useScrollReveal
+│   ├── hooks/                     useMediaQuery / useReducedMotion, useScrollReveal, useSceneJourney
 │   ├── i18n/                      LanguageContext, types
 │   ├── lib/                       gsap setup, shared scene state, WebGL detection, spotlight helper
 │   ├── styles/global.css          design tokens and all styles, mobile-first
@@ -110,12 +111,14 @@ sebastian-portfolio/
 
 - Built entirely in code: a smoothly displaced icosphere with a physical material (metalness, clearcoat, iridescence), a fresnel atmosphere, a wireframe shell, three inclined orbital rings with small satellites, orbiting dust and a starfield.
 - Loaded as a separate chunk with `React.lazy`, so text and layout render before three.js downloads.
-- The sculpture's position and size follow an invisible "stage" element in the layout, so it sits to the right of the text on desktop and below it on mobile without manual tuning.
-- Pointer and touch move it with gentle parallax; tapping or clicking it sends a short pulse and spin. Scrolling lifts and tilts it.
+- The scene is a fixed layer behind the whole page (`SceneLayer.tsx`). In the hero, the sculpture follows an invisible "stage" element in the layout, so it sits to the right of the text on desktop and below it on mobile.
+- As you scroll, `useSceneJourney.ts` glides it to a new spot, size and colour for each section, and the starfield flies past the camera. Stops are listed in that file for desktop and mobile.
+- Cards tilt in 3D toward the mouse pointer (`.tilt`, driven by `trackSpotlight`).
+- Pointer and touch move it with gentle parallax; tapping or clicking it in the hero sends a short pulse and spin.
 - Pixel ratio is capped (1.5–1.75), particle count and geometry detail scale with device capability, and resolution drops automatically if frames are slow.
-- The render loop pauses when the hero is off screen or the tab is hidden.
+- The render loop pauses when the tab is hidden.
 - If WebGL is unavailable, the context is lost, or the scene throws, a static CSS illustration replaces it and all content stays usable.
-- With `prefers-reduced-motion`, the scene renders on demand only (no idle animation or parallax), GSAP reveals are skipped, and CSS animations are disabled.
+- With `prefers-reduced-motion`, the scene renders on demand only and stays in the hero (no journey, star flight, card tilt or parallax), GSAP reveals are skipped, and CSS animations are disabled.
 
 ---
 

@@ -128,7 +128,50 @@ main:focus {
 
 main,
 .footer {
+  position: relative;
+  z-index: 1;
   transition: opacity 0.18s ease;
+}
+
+/* The 3D layer sits behind the content. Main lets pointer events through only
+   over the hero, so the sculpture there can still be tapped. */
+main {
+  pointer-events: none;
+}
+
+main > * {
+  pointer-events: auto;
+}
+
+main > .hero {
+  pointer-events: none;
+}
+
+main > .hero a,
+main > .hero button {
+  pointer-events: auto;
+}
+
+.scene-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.scene-layer.is-ready {
+  opacity: 1;
+}
+
+.scene-layer__fade {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.5s ease;
+}
+
+.scene-layer canvas {
+  touch-action: pan-y !important;
 }
 
 html.is-switching-lang main,
@@ -211,6 +254,23 @@ html.is-switching-lang .nav__links {
   }
   .card:hover {
     border-color: var(--border-strong);
+  }
+}
+
+/* 3D tilt toward the pointer; angles are written by trackSpotlight(). */
+.tilt {
+  transform: translateY(var(--lift, 0px));
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .tilt {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+  }
+  .tilt:hover {
+    transition:
+      border-color 0.35s ease,
+      transform 0.18s ease-out,
+      background-color 0.35s ease;
   }
 }
 
@@ -751,32 +811,6 @@ html.is-switching-lang .nav__links {
   overflow: hidden;
 }
 
-.hero__canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 1.4s ease;
-}
-
-.hero__canvas.is-ready {
-  opacity: 1;
-}
-
-.hero__canvas canvas {
-  touch-action: pan-y !important;
-}
-
-.hero__canvas::after {
-  /* Fades the bottom of the scene into the next section. */
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 22%;
-  background: linear-gradient(180deg, transparent, var(--bg));
-  pointer-events: none;
-}
-
 .hero__grid {
   position: relative;
   z-index: 1;
@@ -1293,7 +1327,7 @@ html.is-switching-lang .nav__links {
 
 @media (hover: hover) {
   .skill:hover {
-    transform: translateY(-4px);
+    --lift: -4px;
   }
 }
 
@@ -1386,7 +1420,7 @@ html.is-switching-lang .nav__links {
 
 @media (hover: hover) {
   .project:hover {
-    transform: translateY(-6px);
+    --lift: -6px;
   }
 }
 
@@ -1838,7 +1872,7 @@ html.is-switching-lang .nav__links {
 
 @media (hover: hover) {
   .channel:hover {
-    transform: translateY(-4px);
+    --lift: -4px;
   }
   .channel:hover .channel__icon {
     background: var(--text);

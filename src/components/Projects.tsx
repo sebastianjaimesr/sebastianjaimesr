@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { projects, type Project } from '../data/projects'
 import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
-import { trackSpotlight } from '../lib/spotlight'
+import { resetTilt, trackSpotlight } from '../lib/spotlight'
 import { GitHubIcon } from './Icons'
 import { ProjectCover } from './ProjectCover'
 import { ProjectDialog } from './ProjectDialog'
@@ -60,7 +60,7 @@ export function Projects() {
 
         <ul className="projects__grid">
           {projects.map((project) => (
-            <li key={project.id} className="project card spotlight" data-reveal onPointerMove={trackSpotlight}>
+            <li key={project.id} className="project card spotlight tilt" data-reveal onPointerMove={trackSpotlight} onPointerLeave={resetTilt}>
               <div className="project__media">
                 <ProjectCover project={project} />
                 <span className="project__index mono" aria-hidden="true">
