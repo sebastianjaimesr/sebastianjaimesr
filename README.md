@@ -89,7 +89,7 @@ sebastian-portfolio/
 │   │   │   ├── StudioEnvironment.tsx  procedural reflections (no HDR download)
 │   │   │   ├── AdaptiveDpr.tsx    lowers resolution on slow devices
 │   │   │   └── textures.ts        canvas-generated sprites, seeded random
-│   │   ├── About.tsx  Skills.tsx  Projects.tsx  ProjectDialog.tsx  ProjectCover.tsx
+│   │   ├── About.tsx (portrait from src/assets)  Skills.tsx  Projects.tsx  ProjectDialog.tsx  ProjectCover.tsx
 │   │   ├── Approach.tsx  Contact.tsx  Footer.tsx
 │   │   ├── SectionHeading.tsx  Icons.tsx  ErrorBoundary.tsx
 │   ├── data/                      editable content (see above)

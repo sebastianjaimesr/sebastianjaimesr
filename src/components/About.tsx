@@ -1,4 +1,5 @@
 import { Database, Globe, Layers, Workflow } from 'lucide-react'
+import portrait from '../assets/sebastian-jaimes.webp'
 import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { resetTilt, trackSpotlight } from '../lib/spotlight'
@@ -13,7 +14,21 @@ export function About() {
     <section id="about" className="section about" aria-labelledby="about-title">
       <div className="container">
         <div className="about__layout">
-          <SectionHeading id="about-title" index={a.index} kicker={a.kicker} title={a.title} />
+          <div className="about__intro">
+            <SectionHeading id="about-title" index={a.index} kicker={a.kicker} title={a.title} />
+            <figure className="portrait tilt" data-reveal onPointerMove={trackSpotlight} onPointerLeave={resetTilt}>
+              <span className="portrait__orbit" aria-hidden="true">
+                <span className="portrait__satellite" />
+              </span>
+              <div className="portrait__frame">
+                <img src={portrait} alt={a.photoAlt} width={640} height={800} loading="lazy" decoding="async" />
+              </div>
+              <figcaption className="portrait__tag">
+                <strong>{site.name}</strong>
+                <span className="mono">{t.hero.title}</span>
+              </figcaption>
+            </figure>
+          </div>
           <div className="about__body">
             <p className="about__lead" data-reveal>
               {a.body}
