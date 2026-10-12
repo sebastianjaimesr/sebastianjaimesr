@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found · Sebastian Jaimes</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#070910" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 24px;
+        background: radial-gradient(60% 50% at 50% 40%, rgba(124, 157, 255, 0.14), transparent 70%), #070910;
+        color: #f4f6ff; font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; text-align: center;
+      }
+      .orb {
+        width: 120px; height: 120px; margin: 0 auto 32px; border-radius: 50%;
+        background: radial-gradient(circle at 32% 28%, #f4f6ff 0%, #7c9dff 22%, #3b3f8f 55%, #0d111d 80%);
+        box-shadow: 0 0 80px rgba(124, 157, 255, 0.35), inset -12px -16px 40px rgba(177, 140, 255, 0.45);
+      }
+      .code { font-family: ui-monospace, 'JetBrains Mono', monospace; color: #a1f3dc; letter-spacing: 0.2em; font-size: 13px; }
+      h1 { font-size: clamp(28px, 6vw, 48px); margin: 12px 0; letter-spacing: -0.02em; }
+      p { color: #9aa4bc; max-width: 44ch; margin: 0 auto 32px; line-height: 1.6; }
+      a {
+        display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 999px;
+        color: #070910; background: #f4f6ff; text-decoration: none; font-weight: 600;
+      }
+      a:focus-visible { outline: 2px solid #a1f3dc; outline-offset: 4px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="orb" aria-hidden="true"></div>
+      <div class="code">ERROR 404 · LOST IN ORBIT</div>
+      <h1>This page drifted out of the universe.</h1>
+      <p>The page you are looking for does not exist. / La página que buscas no existe.</p>
+      <a href="%BASE_URL%">Back to the portfolio · Volver al portafolio</a>
+    </main>
+  </body>
+</html>
