@@ -19,7 +19,7 @@
 <p align="center">
   <a href="https://www.linkedin.com/in/sebastian-jaimes-1a2259398/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:jsrolon01@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://sebastianjaimesr.github.io/emirate-scents/"><img src="https://img.shields.io/badge/Live_demo-Emirate_Scents-0d1117?style=for-the-badge&logo=githubpages&logoColor=white" alt="Live demo" /></a>
+  <a href="https://sebastianjaimesr.github.io/emirate-scents/"><img src="https://img.shields.io/badge/Live_demo-Emirate_Scents-2ea44f?style=for-the-badge&logo=github&logoColor=white" alt="Live demo" /></a>
 </p>
 
 ---
@@ -53,16 +53,12 @@ const sebastian = {
 
 ## 🧭 How I build
 
-Every project follows the same pipeline — from problem to production, with quality gates in between.
+Every project follows the same loop: understand the problem, design the data model and layers, write typed and validated code, test it (unit · API · E2E · accessibility), ship it through CI/CD, and document the decisions.
 
 ```mermaid
 flowchart LR
-    A["🔍 Analyze<br/>problem & users"] --> B["🏗️ Architect<br/>data model & layers"]
-    B --> C["⚙️ Build<br/>typed, validated code"]
-    C --> D["🧪 Test<br/>unit · API · E2E · a11y"]
-    D --> E["🚀 Ship<br/>CI/CD · preview deploys"]
-    E --> F["📝 Document<br/>decisions & trade-offs"]
-    F -.->|next iteration| A
+    A[Analyze] --> B[Architect] --> C[Build] --> D[Test] --> E[Ship] --> F[Document]
+    F -.->|iterate| A
 ```
 
 ---
@@ -73,7 +69,7 @@ flowchart LR
 
 <p>
   <a href="https://github.com/sebastianjaimesr/emirate-scents"><img src="https://img.shields.io/badge/code-repository-181717?style=flat-square&logo=github" alt="Repository" /></a>
-  <a href="https://sebastianjaimesr.github.io/emirate-scents/"><img src="https://img.shields.io/badge/live-preview-2ea44f?style=flat-square&logo=githubpages&logoColor=white" alt="Live preview" /></a>
+  <a href="https://sebastianjaimesr.github.io/emirate-scents/"><img src="https://img.shields.io/badge/live-preview-2ea44f?style=flat-square&logo=github&logoColor=white" alt="Live preview" /></a>
   <img src="https://img.shields.io/github/last-commit/sebastianjaimesr/emirate-scents?style=flat-square&label=last%20commit" alt="Last commit" />
 </p>
 
@@ -81,10 +77,10 @@ Online perfume store with search, filters, cart, favorites and WhatsApp-based ch
 
 ```mermaid
 flowchart LR
-    U["Customer"] --> FE["React 19 SPA<br/>Vite · Zustand · Tailwind"]
-    FE -->|REST| API["Express 5 API<br/>routes → validators → controllers → services"]
+    U["Customer"] --> FE["React SPA"]
+    FE -->|REST| API["Express API"]
     API --> P["Prisma"] --> DB[("PostgreSQL")]
-    API -.->|order summary| W["WhatsApp"]
+    API -.-> W["WhatsApp"]
 ```
 
 | What | How |
@@ -174,7 +170,7 @@ flowchart LR
 ## 📈 Activity
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=sebastianjaimesr&show_icons=true&hide_border=true&theme=transparent&include_all_commits=true&count_private=true&title_color=2ea44f&icon_color=2ea44f" alt="GitHub stats" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=sebastianjaimesr&show_icons=true&hide_border=true&theme=transparent&include_all_commits=true&count_private=true&hide_rank=true&hide=stars&title_color=2ea44f&icon_color=2ea44f" alt="GitHub stats" />
   <img height="165" src="https://streak-stats.demolab.com?user=sebastianjaimesr&hide_border=true&theme=transparent&ring=2ea44f&fire=2ea44f&currStreakLabel=2ea44f" alt="Contribution streak" />
 </p>
 
