@@ -31,8 +31,8 @@ jobs:
         env:
           # This repository is the user site (sebastianjaimesr.github.io), served from the root.
           # For a project site use "/<repo-name>/" instead.
-          BASE_PATH: /
-          VITE_SITE_URL: https://sebastianjaimesr.github.io
+          BASE_PATH: /sebastianjaimesr/
+          VITE_SITE_URL: https://sebastianjaimesr.github.io/sebastianjaimesr
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
