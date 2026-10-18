@@ -56,8 +56,9 @@ const sebastian = {
 Every project follows the same loop: understand the problem, design the data model and layers, write typed and validated code, test it (unit · API · E2E · accessibility), ship it through CI/CD, and document the decisions.
 
 ```mermaid
-flowchart LR
-    A[Analyze] --> B[Architect] --> C[Build] --> D[Test] --> E[Ship] --> F[Document]
+flowchart TB
+    A[Analyze] --> B[Architect] --> C[Build]
+    C --> D[Test] --> E[Ship] --> F[Document]
     F -.->|iterate| A
 ```
 
