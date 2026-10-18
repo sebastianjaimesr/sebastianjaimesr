@@ -57,7 +57,7 @@ export const projects: Project[] = [
     status: 'verified',
     repoUrl: `${GH}/SQL_Proyecto`,
     demoUrl: null,
-    image: null,
+    image: 'images/real-estate-db.webp',
     accent: 'blue',
   },
   {
@@ -81,7 +81,7 @@ export const projects: Project[] = [
     status: 'verified',
     repoUrl: `${GH}/E-COMMERCE_Proyecto`,
     demoUrl: null,
-    image: null,
+    image: 'images/undergold.webp',
     accent: 'violet',
   },
   {
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     status: 'verified',
     repoUrl: `${GH}/N8N_Proyecto`,
     demoUrl: null,
-    image: null,
+    image: 'images/agendabot.webp',
     accent: 'mint',
   },
   {
@@ -129,7 +129,7 @@ export const projects: Project[] = [
     status: 'verified',
     repoUrl: `${GH}/HTML_CSS_Proyecto`,
     demoUrl: null,
-    image: null,
+    image: 'images/space-rides.webp',
     accent: 'indigo',
   },
   {
@@ -153,7 +153,7 @@ export const projects: Project[] = [
     status: 'verified',
     repoUrl: `${GH}/PYTHON_Proyecto`,
     demoUrl: null,
-    image: null,
+    image: 'images/tool-lending.webp',
     accent: 'blue',
   },
 ]
