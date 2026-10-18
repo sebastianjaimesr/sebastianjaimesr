@@ -55,6 +55,12 @@ const sebastian = {
 
 Every project follows the same loop: understand the problem, design the data model and layers, write typed and validated code, test it (unit · API · E2E · accessibility), ship it through CI/CD, and document the decisions.
 
+```mermaid
+flowchart LR
+    A[Analyze] --> B[Architect] --> C[Build] --> D[Test] --> E[Ship] --> F[Document]
+    F -.->|iterate| A
+```
+
 ---
 
 ## 🚀 Featured work
@@ -68,13 +74,6 @@ Every project follows the same loop: understand the problem, design the data mod
 </p>
 
 Online perfume store with search, filters, cart, favorites and WhatsApp-based checkout — built in **8 documented phases**, from architecture analysis to production readiness.
-
-| What | How |
-| --- | --- |
-| **Layered API** | Routes → Zod validators → controllers → services. Business rules live in one place; the server owns prices and stock. |
-| **3 test layers** | Vitest unit tests · Supertest API tests on an isolated database · Playwright E2E with automated **axe** accessibility checks (desktop + mobile). |
-| **Hardened** | Validated env, helmet, CORS policy, request limits, structured logging (pino). |
-| **Shipped** | GitHub Actions deploys a static preview to GitHub Pages on every push to `main`. |
 
 ---
 
