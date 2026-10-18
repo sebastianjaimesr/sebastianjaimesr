@@ -75,14 +75,6 @@ flowchart LR
 
 Online perfume store with search, filters, cart, favorites and WhatsApp-based checkout — built in **8 documented phases**, from architecture analysis to production readiness.
 
-```mermaid
-flowchart LR
-    U["Customer"] --> FE["React SPA"]
-    FE -->|REST| API["Express API"]
-    API --> P["Prisma"] --> DB[("PostgreSQL")]
-    API -.-> W["WhatsApp"]
-```
-
 | What | How |
 | --- | --- |
 | **Layered API** | Routes → Zod validators → controllers → services. Business rules live in one place; the server owns prices and stock. |
