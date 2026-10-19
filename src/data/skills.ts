@@ -1,3 +1,7 @@
+/**
+ * HABILIDADES (en español): lista de tecnologías de la sección "Habilidades".
+ * Cada una tiene nombre, glifo corto, categoría y una nota en inglés y español.
+ */
 import type { Localized } from '../i18n/types'
 
 /**
@@ -22,6 +26,7 @@ export interface Skill {
 
 export const skillCategories: SkillCategory[] = ['programming', 'web', 'databases', 'automation', 'tools']
 
+// Para agregar una tecnología, copia un objeto de esta lista y cambia sus valores.
 export const skills: Skill[] = [
   {
     name: 'JavaScript',

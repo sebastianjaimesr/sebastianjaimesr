@@ -1,3 +1,6 @@
+/**
+ * Entorno de reflejos generado por código (sin descargar archivos HDR).
+ */
 import { useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
 import * as THREE from 'three'
@@ -11,6 +14,7 @@ interface Panel {
 }
 
 /** Light panels that the metallic surfaces reflect: blue and violet strips, a white ring, a mint floor strip. */
+// Paneles de luz que se reflejan en las superficies metálicas.
 const PANELS: Panel[] = [
   { shape: 'rect', color: '#7C9DFF', intensity: 2.6, position: [-5, 1.5, -1], scale: [10, 2.2] },
   { shape: 'rect', color: '#B18CFF', intensity: 2.1, position: [5, -1, -1], scale: [10, 3] },
@@ -62,6 +66,7 @@ export function StudioEnvironment({ size = 256 }: { size?: number }) {
       disposables.push(geometry, material)
     }
 
+    // Renderiza el "estudio" una vez a un mapa de entorno que todos los materiales usan para sus reflejos.
     const target = pmrem.fromScene(studio, 0.035, 0.1, 100, { size })
     scene.environment = target.texture
     invalidate()

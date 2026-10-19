@@ -1,3 +1,11 @@
+/**
+ * ESTILOS GLOBALES (en español)
+ * Todo el CSS del sitio está en este archivo, ordenado por secciones (ver índice abajo).
+ * - Tokens (:root): variables de color, espaciado y tipografía reutilizadas en todo el archivo.
+ * - Las clases siguen la convención BEM: bloque__elemento--modificador (ej. hero__title, btn--primary).
+ * - Diseño "mobile first": los estilos base son para móvil y las @media (min-width) amplían a pantallas grandes.
+ * - La sección 15 desactiva animaciones si el usuario activó "reducir movimiento".
+ */
 /* ==========================================================================
    Sebastian Jaimes · Digital Universe
    1. Tokens   2. Base   3. Utilities   4. Backdrop   5. Buttons & chips
@@ -7,6 +15,7 @@
    ========================================================================== */
 
 /* 1. Tokens ---------------------------------------------------------------- */
+/* Variables CSS (custom properties): se usan con var(--nombre). Cambiar un color aquí lo cambia en todo el sitio. */
 :root {
   --bg: #070910;
   --bg-2: #0d111d;

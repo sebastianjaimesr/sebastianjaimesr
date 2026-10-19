@@ -1,10 +1,15 @@
+/**
+ * Pie de página: monograma, nombre, enlaces (GitHub, correo, volver arriba) y derechos.
+ */
 import { ArrowUp, Mail } from 'lucide-react'
 import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { GitHubIcon, Monogram } from './Icons'
 
+/** Componente del pie de página. */
 export function Footer() {
   const { t } = useLanguage()
+  // El año se calcula solo, así el © nunca queda desactualizado.
   const year = new Date().getFullYear()
   return (
     <footer className="footer">

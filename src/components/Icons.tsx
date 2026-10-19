@@ -1,5 +1,9 @@
+/**
+ * Íconos SVG propios: logos de GitHub y LinkedIn, y el monograma "SJ".
+ */
 import type { SVGProps } from 'react'
 
+// Props de un <svg> normal más un tamaño opcional.
 type IconProps = SVGProps<SVGSVGElement> & { size?: number }
 
 /** Brand marks are not part of the icon library, so they are inlined here. */
@@ -11,6 +15,7 @@ export function GitHubIcon({ size = 20, ...props }: IconProps) {
   )
 }
 
+/** Logo de LinkedIn como SVG en línea; usa currentColor para heredar el color del texto. */
 export function LinkedInIcon({ size = 20, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" {...props}>

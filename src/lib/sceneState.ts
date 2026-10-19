@@ -1,21 +1,24 @@
 /**
- * Mutable state shared between the DOM and the WebGL scene. It is written by
- * event listeners and read inside the render loop, so pointer and scroll
- * movement never trigger React re-renders.
+ * Estado mutable compartido entre el DOM y la escena WebGL. Lo escriben los
+ * listeners de eventos (mouse, scroll) y lo lee el bucle de render en cada frame.
+ *
+ * ¿Por qué un objeto simple y no useState? Porque el mouse y el scroll cambian
+ * decenas de veces por segundo; si fuera estado de React, cada cambio provocaría
+ * un re-render. Así la escena 3D se actualiza sin tocar React.
  */
 export const sceneState = {
-  /** Pointer position in normalized device coordinates (-1..1). */
+  /** Posición del puntero en coordenadas normalizadas (-1..1). */
   pointer: { x: 0, y: 0 },
-  /** 0 at the top of the hero, 1 once the hero has scrolled out of view. */
+  /** 0 arriba del hero, 1 cuando el hero ya salió de la pantalla. */
   scroll: 0,
-  /** 0 at the top of the page, 1 at the bottom. */
+  /** 0 al inicio de la página, 1 al final. */
   page: 0,
-  /** Recent scroll speed, 0..1. Written on scroll, decays in the render loop. */
+  /** Velocidad reciente del scroll, de 0 a 1. Se escribe al hacer scroll y decae en el bucle de render. */
   velocity: 0,
-  /** Where the sculpture should sit, in viewport NDC, set by the scroll journey. */
+  /** Dónde debe ubicarse la escultura (en coordenadas de pantalla -1..1); lo define useSceneJourney. */
   anchor: { x: 0.45, y: 0, size: 0.6, ready: false },
-  /** Colour palette index (fractional values blend between neighbours). */
+  /** Índice de la paleta de colores (los decimales mezclan dos paletas vecinas). */
   tint: 0,
-  /** Set to performance.now() when the user taps the sculpture. */
+  /** Momento (performance.now()) en que el usuario tocó la escultura; dispara el "pulso". */
   pulseAt: -Infinity,
 }

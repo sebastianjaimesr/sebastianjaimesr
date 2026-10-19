@@ -1,3 +1,6 @@
+/**
+ * Utilidades para la escena 3D: texturas generadas en un canvas y números aleatorios con semilla.
+ */
 import * as THREE from 'three'
 
 /** Soft round sprite generated on a canvas, used for particles and the glow halo. */
@@ -18,6 +21,7 @@ export function createRadialTexture(size: number, stops: [number, string][]): TH
 
 /** Deterministic pseudo-random generator so the scene looks the same on every load. */
 export function seededRandom(seed: number) {
+  // Algoritmo mulberry32: con la misma semilla siempre da la misma secuencia de números.
   let s = seed >>> 0
   return () => {
     s = (s + 0x6d2b79f5) >>> 0

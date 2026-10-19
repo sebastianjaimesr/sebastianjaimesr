@@ -1,9 +1,15 @@
+/**
+ * TRADUCCIONES (en español): todos los textos de la interfaz en inglés (en) y español (es).
+ * `Dictionary = typeof en` toma la forma del objeto inglés como tipo; así, si al
+ * objeto español le falta un texto, TypeScript marca error al compilar.
+ */
 import type { Lang } from '../i18n/types'
 
 /**
  * All interface copy, in English and Spanish. Both objects must share the
  * same shape: TypeScript enforces it through the `Dictionary` type.
  */
+// Textos en inglés (también definen la "forma" del diccionario).
 const en = {
   meta: {
     title: 'Sebastian Jaimes · Full-Stack Developer in Training',
@@ -161,8 +167,10 @@ const en = {
   },
 }
 
+// El tipo Dictionary se deduce del objeto en.
 export type Dictionary = typeof en
 
+// Textos en español: deben tener exactamente las mismas claves que en.
 const es: Dictionary = {
   meta: {
     title: 'Sebastian Jaimes · Desarrollador Full-Stack en formación',
@@ -320,4 +328,5 @@ const es: Dictionary = {
   },
 }
 
+// Ambos diccionarios indexados por idioma; LanguageContext elige uno con dictionaries[lang].
 export const dictionaries: Record<Lang, Dictionary> = { en, es }

@@ -1,3 +1,5 @@
+# Flujo de GitHub Actions: en cada push a main instala dependencias, compila
+# con "npm run build" y publica la carpeta dist en GitHub Pages.
 # Builds the site and publishes it to GitHub Pages on every push to main.
 # One-time setup: repository Settings → Pages → Source: "GitHub Actions".
 name: Deploy to GitHub Pages
@@ -16,6 +18,7 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Dos trabajos: build (compila) y deploy (publica). deploy espera a build (needs).
 jobs:
   build:
     runs-on: ubuntu-latest
