@@ -1,4 +1,8 @@
 /**
+ * DATOS PERSONALES (en español): única fuente de verdad para nombre, correo,
+ * teléfono y enlaces. Si cambias algo aquí, se actualiza en todo el sitio.
+ */
+/**
  * Personal information: the single source of truth for contact details.
  * Edit this file to update links shown across the site.
  *
@@ -22,5 +26,6 @@ export const site = {
   availableForWork: true,
 } as const
 
+// Arma un enlace "mailto:" con asunto. encodeURIComponent convierte espacios y tildes a un formato válido de URL.
 export const mailtoHref = (subject: string) =>
   `mailto:${site.email}?subject=${encodeURIComponent(subject)}`

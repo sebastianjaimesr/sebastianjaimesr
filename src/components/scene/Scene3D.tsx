@@ -1,3 +1,10 @@
+/**
+ * Escena 3D completa (React Three Fiber + three.js).
+ *
+ * Se carga de forma diferida (lazy) desde SceneLayer para que el texto de la
+ * página aparezca primero. Crea el <Canvas>, las luces, el entorno de reflejos,
+ * el campo de estrellas y la escultura.
+ */
 import { Canvas, useThree } from '@react-three/fiber'
 import { useCallback, useEffect } from 'react'
 import type { QualityTier } from '../../lib/webgl'
@@ -31,8 +38,10 @@ export interface Scene3DProps {
  * models, textures or HDR files are downloaded.
  */
 export default function Scene3D({ tier, reducedMotion, active, onReady, onContextLost }: Scene3DProps) {
+  // DPR (densidad de píxeles): más alto se ve más nítido pero cuesta más. Se limita según la calidad.
   const maxDpr = tier === 'high' ? 1.75 : 1.5
 
+  // Al crear el canvas: escucha si el navegador pierde el contexto WebGL y avisa que la escena ya está lista.
   const handleCreated = useCallback(
     ({ gl }: { gl: { domElement: HTMLCanvasElement } }) => {
       gl.domElement.addEventListener(
@@ -60,6 +69,7 @@ export default function Scene3D({ tier, reducedMotion, active, onReady, onContex
     >
       {!reducedMotion && <AdaptiveDpr />}
 
+      {/* Luces: una ambiental suave, una direccional y dos puntuales de color. */}
       <ambientLight intensity={0.18} color="#9aa4ff" />
       <directionalLight position={[4, 5, 6]} intensity={2.2} color="#d6deff" />
       <pointLight position={[-4, -2, 3]} intensity={28} color="#B18CFF" />

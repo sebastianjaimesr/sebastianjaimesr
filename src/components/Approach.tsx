@@ -1,14 +1,22 @@
+/**
+ * Sección "Enfoque" (#approach): los 3 pasos de cómo trabaja Sebastián.
+ *
+ * Una línea vertical conecta los pasos y se "dibuja" a medida que el usuario hace scroll.
+ */
 import { Compass, Hammer, RefreshCw } from 'lucide-react'
 import { useLayoutEffect, useRef } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { gsap } from '../lib/gsap'
 import { SectionHeading } from './SectionHeading'
 
+// Íconos de cada paso, en el mismo orden que t.approach.steps.
 const STEP_ICONS = [Compass, Hammer, RefreshCw]
 
+/** Componente de la sección "Enfoque". */
 export function Approach() {
   const { t } = useLanguage()
   const a = t.approach
+  // Referencia al contenedor de la línea, para animarlo con GSAP.
   const listRef = useRef<HTMLDivElement>(null)
 
   // The connecting line draws itself as the section scrolls into view.
@@ -19,6 +27,7 @@ export function Approach() {
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       gsap.fromTo(
         list,
+        // Anima la variable CSS --progress de 0 a 1; el CSS la usa para escalar la línea.
         { '--progress': 0 },
         {
           '--progress': 1,
@@ -36,6 +45,7 @@ export function Approach() {
         <SectionHeading id="approach-title" index={a.index} kicker={a.kicker} title={a.title} />
         <div className="approach__track" ref={listRef}>
           <div className="approach__line" aria-hidden="true" />
+          {/* <ol> = lista ordenada, porque los pasos tienen un orden. */}
           <ol className="approach__steps">
           {a.steps.map((step, i) => {
             const Icon = STEP_ICONS[i]

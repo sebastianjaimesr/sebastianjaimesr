@@ -1,3 +1,6 @@
+/**
+ * Campo de estrellas detrás de la escultura. Al hacer scroll la cámara "vuela" entre ellas.
+ */
 import { useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
@@ -5,6 +8,7 @@ import type { QualityTier } from '../../lib/webgl'
 import { sceneState } from '../../lib/sceneState'
 import { createRadialTexture, seededRandom } from './textures'
 
+// Cantidad de estrellas según la calidad, y sus colores posibles.
 const STAR_COUNT: Record<QualityTier, number> = { low: 350, medium: 650, high: 1100 }
 const PALETTE = ['#F4F6FF', '#C9D4FF', '#7C9DFF', '#B18CFF']
 
@@ -43,6 +47,8 @@ export function Starfield({ tier, reducedMotion }: { tier: QualityTier; reducedM
       [1, 'rgba(255,255,255,0)'],
     ])
     const uniforms = { uOffset: { value: 0 } }
+    // Modifica el shader estándar de three.js: desplaza cada estrella en z y la "envuelve"
+    // con mod() para que vuelva al fondo al pasar la cámara (campo infinito).
     const onBeforeCompile = (shader: THREE.WebGLProgramParametersWithUniforms) => {
       shader.uniforms.uOffset = uniforms.uOffset
       shader.vertexShader = shader.vertexShader
@@ -68,6 +74,7 @@ export function Starfield({ tier, reducedMotion }: { tier: QualityTier; reducedM
     [geometry, texture],
   )
 
+  // En cada frame: parallax con el puntero y avance según el scroll y su velocidad.
   useFrame((_, delta) => {
     const points = ref.current
     if (!points) return

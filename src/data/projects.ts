@@ -1,3 +1,7 @@
+/**
+ * PROYECTOS (en español): datos de cada tarjeta de la sección "Proyectos".
+ * La interfaz Project define qué campos debe tener cada uno; TypeScript avisa si falta alguno.
+ */
 import type { Localized } from '../i18n/types'
 
 /**
@@ -15,6 +19,7 @@ import type { Localized } from '../i18n/types'
  */
 export type ProjectStatus = 'verified' | 'in-progress' | 'unverified'
 
+// URL base del GitHub, para no repetirla en cada proyecto.
 const GH = 'https://github.com/sebastianjaimesr'
 
 export interface Project {
@@ -35,6 +40,7 @@ export interface Project {
   accent: 'blue' | 'violet' | 'mint' | 'indigo'
 }
 
+// Lista de proyectos en el orden en que aparecen en la página.
 export const projects: Project[] = [
   {
     id: 'real-estate-db',

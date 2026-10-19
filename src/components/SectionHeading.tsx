@@ -1,3 +1,7 @@
+/**
+ * Encabezado reutilizable de cada sección: número, subtítulo pequeño (kicker), título e introducción opcional.
+ */
+// Props del encabezado. intro es opcional (por eso lleva "?").
 interface Props {
   id: string
   index: string
@@ -6,6 +10,7 @@ interface Props {
   intro?: string
 }
 
+/** Encabezado de sección. El número grande de fondo tiene efecto parallax (data-parallax). */
 export function SectionHeading({ id, index, kicker, title, intro }: Props) {
   return (
     <header className="section-head">

@@ -1,3 +1,9 @@
+/**
+ * Sección "Proyectos" (#projects).
+ *
+ * Muestra una tarjeta por cada proyecto de data/projects.ts y abre un modal
+ * con el detalle al presionar "Ver detalles".
+ */
 import { ArrowUpRight, CircleDot } from 'lucide-react'
 import { useState } from 'react'
 import { projects, type Project } from '../data/projects'
@@ -9,6 +15,10 @@ import { ProjectCover } from './ProjectCover'
 import { ProjectDialog } from './ProjectDialog'
 import { SectionHeading } from './SectionHeading'
 
+/**
+ * Botones de enlace: el repositorio (o el perfil de GitHub si no hay repo) y la demo si existe.
+ * Se exporta porque también lo usa ProjectDialog.
+ */
 export function ProjectLinks({ project }: { project: Project }) {
   const { t } = useLanguage()
   const p = t.projects
@@ -38,6 +48,7 @@ export function ProjectLinks({ project }: { project: Project }) {
   )
 }
 
+/** Etiqueta con el estado del proyecto (verificado, en progreso, sin verificar). */
 export function StatusBadge({ status }: { status: Project['status'] }) {
   const { t } = useLanguage()
   return (
@@ -48,9 +59,11 @@ export function StatusBadge({ status }: { status: Project['status'] }) {
   )
 }
 
+/** Componente de la sección de proyectos. */
 export function Projects() {
   const { lang, t } = useLanguage()
   const p = t.projects
+  // Proyecto abierto en el modal (null = modal cerrado).
   const [selected, setSelected] = useState<Project | null>(null)
 
   return (
@@ -94,6 +107,7 @@ export function Projects() {
         </ul>
       </div>
 
+      {/* Un solo modal para todos los proyectos; muestra el que esté seleccionado. */}
       <ProjectDialog project={selected} onClose={() => setSelected(null)} />
     </section>
   )

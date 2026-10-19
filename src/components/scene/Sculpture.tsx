@@ -1,3 +1,10 @@
+/**
+ * La escultura 3D: esfera metálica deformada, halo de atmósfera, malla de
+ * alambre, anillos orbitales con satélites y polvo de partículas.
+ *
+ * En cada frame lee sceneState (scroll y puntero) y se mueve suavemente hacia
+ * la posición y color que le corresponden. Al tocarla gira y "pulsa".
+ */
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
 import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
@@ -6,6 +13,7 @@ import { sceneState } from '../../lib/sceneState'
 import type { QualityTier } from '../../lib/webgl'
 import { createRadialTexture, seededRandom } from './textures'
 
+// Detalle de la geometría y cantidad de partículas de polvo según la calidad del dispositivo.
 const DETAIL: Record<QualityTier, number> = { low: 14, medium: 24, high: 36 }
 const DUST_COUNT: Record<QualityTier, number> = { low: 160, medium: 320, high: 560 }
 /** Diameter of the outermost ring in local units; used to fit the group to its DOM stage. */
@@ -26,6 +34,7 @@ function createSculptureGeometry(detail: number) {
   for (let i = 0; i < pos.count; i++) {
     v.fromBufferAttribute(pos, i).normalize()
     const { x, y, z } = v
+    // Desplazamiento: suma de ondas seno de distinta frecuencia y amplitud (un "ruido" simple y suave).
     const d =
       0.055 * Math.sin(3.1 * x + 1.7) * Math.sin(2.7 * y + 0.4) * Math.sin(3.3 * z + 2.1) +
       0.026 * Math.sin(6.2 * x + 4.1 * y + 0.8) +
@@ -38,6 +47,8 @@ function createSculptureGeometry(detail: number) {
   return geo
 }
 
+// Shaders GLSL (programas que corren en la tarjeta gráfica) del halo de atmósfera.
+// El fragment shader pinta más fuerte los bordes de la esfera (efecto "rim").
 const atmosphereVertex = /* glsl */ `
   varying vec3 vNormal;
   void main() {
@@ -76,12 +87,14 @@ function blendPalette(tint: number, primary: THREE.Color, secondary: THREE.Color
   secondary.copy(PALETTE_COLORS[i][1]).lerp(PALETTE_COLORS[j][1], t)
 }
 
+// Configuración de los 3 anillos: radio, grosor, rotación, color, opacidad, velocidad y satélite.
 const RINGS = [
   { radius: 1.72, tube: 0.006, rotation: [1.18, 0.22, 0] as const, color: '#7C9DFF', opacity: 0.75, speed: 0.22, satellite: '#A1F3DC' },
   { radius: 2.08, tube: 0.0045, rotation: [1.86, -0.42, 0.3] as const, color: '#B18CFF', opacity: 0.55, speed: -0.15, satellite: '#B18CFF' },
   { radius: 2.42, tube: 0.0035, rotation: [0.62, 0.92, -0.2] as const, color: '#C9D4FF', opacity: 0.35, speed: 0.09, satellite: null },
 ]
 
+/** Componente de la escultura. motion guarda los valores suavizados que se acercan poco a poco a los de sceneState. */
 export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedMotion: boolean }) {
   const group = useRef<THREE.Group>(null)
   const core = useRef<THREE.Mesh>(null)
@@ -110,6 +123,7 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
   const detail = DETAIL[tier]
   const dustCount = DUST_COUNT[tier]
 
+  // Crea geometrías, texturas y materiales una sola vez (son costosos de crear).
   const resources = useMemo(() => {
     const sculpture = createSculptureGeometry(detail)
     const shellSource = new THREE.IcosahedronGeometry(1.3, 1)
@@ -155,6 +169,7 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
     return { sculpture, shellEdges, dustGeometry, dot, glow, atmosphere }
   }, [detail, dustCount])
 
+  // Libera la memoria de la tarjeta gráfica al desmontar (three.js no lo hace automáticamente).
   useEffect(
     () => () => {
       resources.sculpture.dispose()
@@ -174,11 +189,14 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
     [],
   )
 
+  // useFrame se ejecuta en cada frame (~60 veces por segundo). delta = segundos desde el frame anterior.
   useFrame((state, delta) => {
     const g = group.current
     if (!g) return
     const d = Math.min(delta, 0.05)
     const m = motion.current
+    // Suavizado exponencial: cada frame recorre una fracción de la distancia que falta.
+    // Funciona igual a 30 o 144 FPS porque depende del tiempo (delta), no del número de frames.
     const follow = 1 - Math.exp(-d * (reducedMotion ? 30 : 3.5))
 
     m.px += (sceneState.pointer.x - m.px) * follow
@@ -238,6 +256,7 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
     }
   })
 
+  // Al tocar la escultura: dispara el pulso y le da un impulso de giro.
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation()
     sceneState.pulseAt = performance.now()
@@ -254,6 +273,7 @@ export function Sculpture({ tier, reducedMotion }: { tier: QualityTier; reducedM
 
   return (
     <group ref={group}>
+      {/* Brillo difuso detrás de la escultura. */}
       <sprite scale={6.2} renderOrder={-1}>
         <spriteMaterial ref={glowMaterial} map={resources.glow} transparent depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
       </sprite>

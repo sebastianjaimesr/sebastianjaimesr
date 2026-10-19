@@ -1,3 +1,9 @@
+/**
+ * Barra de navegación fija.
+ *
+ * Incluye: barra de progreso de lectura, enlaces a las secciones (resalta la
+ * sección visible), selector de idioma EN/ES y menú desplegable para móvil.
+ */
 import { Menu, X } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { site } from '../data/site'
@@ -7,11 +13,14 @@ import type { Lang } from '../i18n/types'
 import { ScrollTrigger } from '../lib/gsap'
 import { Monogram } from './Icons'
 
+// Ids de las secciones. 'as const' permite derivar un tipo con exactamente esos valores.
 const SECTIONS = ['about', 'skills', 'projects', 'approach', 'contact'] as const
 type SectionId = (typeof SECTIONS)[number]
 
+/** Componente de la barra de navegación. */
 export function Navbar() {
   const { lang, t, setLang } = useLanguage()
+  // open = menú móvil abierto; scrolled = el usuario ya bajó; current = sección visible ahora.
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [current, setCurrent] = useState<SectionId | null>(null)
@@ -21,6 +30,7 @@ export function Navbar() {
 
   // Scroll progress bar + compact header state. The bar is written directly to the DOM.
   useEffect(() => {
+    // requestAnimationFrame agrupa los eventos de scroll en una sola actualización por frame (mejor rendimiento).
     let frame = 0
     const update = () => {
       frame = 0
@@ -44,6 +54,7 @@ export function Navbar() {
 
   // Highlight the section currently in view.
   useEffect(() => {
+    // IntersectionObserver avisa cuando una sección cruza la franja central de la pantalla (definida con rootMargin).
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -67,6 +78,7 @@ export function Navbar() {
     }
   }, [])
 
+  /** Cierra el menú móvil y, si se pide, devuelve el foco al botón (accesibilidad con teclado). */
   const closeMenu = useCallback((restoreFocus = true) => {
     setOpen(false)
     if (restoreFocus) toggleRef.current?.focus()
@@ -92,6 +104,7 @@ export function Navbar() {
     }
   }, [open, closeMenu])
 
+  /** Cambia de idioma con un breve desvanecido. Si el usuario prefiere menos movimiento, cambia de inmediato. */
   const switchLanguage = (next: Lang) => {
     if (next === lang) return
     const root = document.documentElement
@@ -170,6 +183,7 @@ export function Navbar() {
         </div>
       </div>
 
+      {/* Menú móvil. "inert" lo desactiva (no se puede tabular ni hacer clic) mientras está cerrado. */}
       <div id="mobile-menu" className="mobile-menu" ref={menuRef} inert={!open} aria-hidden={!open}>
         <nav aria-label={t.nav.label}>
           <ol className="mobile-menu__list">

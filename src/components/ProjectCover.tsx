@@ -1,5 +1,9 @@
+/**
+ * Portada de cada proyecto: la imagen real si existe, o una portada SVG generada por código.
+ */
 import type { Project } from '../data/projects'
 
+// Pares de colores (claro, oscuro) para cada color de acento.
 const ACCENTS: Record<Project['accent'], [string, string]> = {
   blue: ['#7C9DFF', '#3E4FA8'],
   violet: ['#B18CFF', '#5B3FA6'],
@@ -9,10 +13,12 @@ const ACCENTS: Record<Project['accent'], [string, string]> = {
 
 /** Generated cover artwork, so projects without screenshots still look intentional. */
 export function ProjectCover({ project }: { project: Project }) {
+  // Si el proyecto tiene imagen, se usa; si no, se dibuja una portada SVG.
   if (project.image) {
     return <img className="project__image" src={`${import.meta.env.BASE_URL}${project.image.replace(/^\//, '')}`} alt="" loading="lazy" decoding="async" />
   }
   const [light, deep] = ACCENTS[project.accent]
+  // Ids únicos por proyecto: si dos SVG de la página usaran el mismo id de gradiente, chocarían.
   const gid = `cover-${project.id}`
   return (
     <svg className="project__cover" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">

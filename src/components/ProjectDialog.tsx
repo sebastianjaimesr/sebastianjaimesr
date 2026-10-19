@@ -1,3 +1,6 @@
+/**
+ * Ventana modal con el detalle de un proyecto (descripción, funciones, tecnologías y enlaces).
+ */
 import { X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import type { Project } from '../data/projects'
@@ -8,8 +11,10 @@ import { ProjectLinks, StatusBadge } from './Projects'
 /** Native <dialog>: focus trapping, Escape handling and focus return come from the browser. */
 export function ProjectDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
   const { lang, t } = useLanguage()
+  // Referencia al elemento <dialog> para llamar a showModal() y close().
   const ref = useRef<HTMLDialogElement>(null)
 
+  // Sincroniza el <dialog> con el estado: lo abre si hay proyecto y lo cierra si no.
   useEffect(() => {
     const dialog = ref.current
     if (!dialog) return
