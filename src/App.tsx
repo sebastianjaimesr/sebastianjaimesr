@@ -4,6 +4,7 @@ import { Approach } from './components/Approach'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
+import { Journey } from './components/Journey'
 import { Navbar } from './components/Navbar'
 import { Projects } from './components/Projects'
 import { SceneLayer, type SceneStatus } from './components/SceneLayer'
@@ -35,8 +36,9 @@ export default function App() {
       <main id="main" tabIndex={-1}>
         <Hero sceneStatus={sceneStatus} />
         <About />
-        <Skills />
         <Projects />
+        <Journey />
+        <Skills />
         <Approach />
         <Contact />
       </main>

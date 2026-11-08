@@ -14,19 +14,21 @@ interface Key {
 }
 
 /** Sections the sculpture travels through, in page order, after the hero. */
-const SECTIONS = ['about', 'skills', 'projects', 'approach', 'contact']
+const SECTIONS = ['about', 'projects', 'journey', 'skills', 'approach', 'contact']
 
 // Desktop stops keep to the outer edges, clear of the left-aligned headings.
 const DESKTOP: Key[] = [
   { x: 0.9, y: -0.68, size: 0.4, tint: 1, fade: 0.7 },
+  { x: 0.88, y: 0.62, size: 0.3, tint: 3, fade: 0.55 },
+  { x: 0.8, y: -0.1, size: 0.34, tint: 2, fade: 0.7 },
   { x: -0.84, y: 0.5, size: 0.34, tint: 2, fade: 0.7 },
-  { x: 0.86, y: 0.55, size: 0.32, tint: 3, fade: 0.7 },
   { x: -0.86, y: 0.55, size: 0.36, tint: 4, fade: 0.7 },
   { x: 0.7, y: 0.32, size: 0.5, tint: 5, fade: 0.85 },
 ]
 
 const MOBILE: Key[] = [
   { x: 0.78, y: 0.55, size: 0.3, tint: 1, fade: 0.5 },
+  { x: 0.8, y: 0.62, size: 0.24, tint: 3, fade: 0.35 },
   { x: -0.8, y: 0.45, size: 0.28, tint: 2, fade: 0.45 },
   { x: 0.8, y: 0.6, size: 0.26, tint: 3, fade: 0.45 },
   { x: -0.78, y: 0.5, size: 0.3, tint: 4, fade: 0.45 },

@@ -7,7 +7,7 @@ import type { Lang } from '../i18n/types'
 import { ScrollTrigger } from '../lib/gsap'
 import { Monogram } from './Icons'
 
-const SECTIONS = ['about', 'skills', 'projects', 'approach', 'contact'] as const
+const SECTIONS = ['about', 'projects', 'journey', 'skills', 'contact'] as const
 type SectionId = (typeof SECTIONS)[number]
 
 export function Navbar() {
@@ -138,7 +138,7 @@ export function Navbar() {
           <Monogram />
           <span className="nav__brand-text">
             {site.name}
-            <span className="mono">Full-Stack Dev</span>
+            <span className="mono">{t.nav.brandRole}</span>
           </span>
         </a>
 
@@ -185,7 +185,9 @@ export function Navbar() {
         </nav>
         <div className="mobile-menu__footer mono">
           <a href={`mailto:${site.email}`}>{site.email}</a>
-          <span>{site.location}</span>
+          <span>
+            {site.location} · {site.timezone}
+          </span>
         </div>
       </div>
     </header>

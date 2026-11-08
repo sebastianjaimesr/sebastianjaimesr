@@ -1,117 +1,60 @@
 import type { Localized } from '../i18n/types'
 
 /**
- * Technologies shown in the "Skills" section. No proficiency percentages or
- * levels on purpose: each entry describes how the technology is used.
- *
- * `confirmed: true` marks a technology the owner still has to confirm.
- * Set `showUnconfirmedSkills` to false to hide those entries from the site.
+ * Technologies shown in the "Toolkit" section. No percentages or proficiency levels on
+ * purpose. Each entry names where it is used, and every technology appears in the code or
+ * manifests of at least one public repository (checked on 2026-11-07).
+ * Not listed because no repository uses them yet: SQLite.
  */
-export const showUnconfirmedSkills = true
-
-export type SkillCategory = 'programming' | 'web' | 'databases' | 'automation' | 'tools'
+export type SkillCategory = 'frontend' | 'backend' | 'databases' | 'testing' | 'tools'
 
 export interface Skill {
   name: string
-  /** Two or three characters shown in the card glyph. */
-  glyph: string
   category: SkillCategory
-  note: Localized
-  confirmed: boolean
+  /** Projects where it is used; shown as a small note under the name. */
+  usedIn: Localized
 }
 
-export const skillCategories: SkillCategory[] = ['programming', 'web', 'databases', 'automation', 'tools']
+export const skillCategories: SkillCategory[] = ['frontend', 'backend', 'databases', 'testing', 'tools']
+
+const both = (text: string): Localized => ({ en: text, es: text })
 
 export const skills: Skill[] = [
-  {
-    name: 'JavaScript',
-    glyph: 'JS',
-    category: 'programming',
-    note: { en: 'Interactivity, DOM and application logic', es: 'Interactividad, DOM y lógica de aplicaciones' },
-    confirmed: true,
-  },
-  {
-    name: 'Python',
-    glyph: 'Py',
-    category: 'programming',
-    note: { en: 'Scripting and problem solving', es: 'Scripts y resolución de problemas' },
-    confirmed: true,
-  },
-  {
-    name: 'Java',
-    glyph: 'Jv',
-    category: 'programming',
-    note: { en: 'Currently learning object-oriented programming', es: 'Aprendiendo programación orientada a objetos' },
-    confirmed: true,
-  },
-  {
-    name: 'HTML',
-    glyph: '</>',
-    category: 'web',
-    note: { en: 'Semantic, accessible page structure', es: 'Estructura de páginas semántica y accesible' },
-    confirmed: true,
-  },
-  {
-    name: 'CSS',
-    glyph: '{ }',
-    category: 'web',
-    note: { en: 'Layout, visual identity and animation', es: 'Maquetación, identidad visual y animación' },
-    confirmed: true,
-  },
-  {
-    name: 'Responsive design',
-    glyph: '⇆',
-    category: 'web',
-    note: { en: 'Interfaces that adapt from phone to desktop', es: 'Interfaces que se adaptan del móvil al escritorio' },
-    confirmed: true,
-  },
-  {
-    name: 'SQL',
-    glyph: 'SQL',
-    category: 'databases',
-    note: { en: 'Queries, joins and data rules', es: 'Consultas, joins y reglas de datos' },
-    confirmed: true,
-  },
-  {
-    name: 'MySQL',
-    glyph: 'My',
-    category: 'databases',
-    note: { en: 'Relational databases in practice', es: 'Bases de datos relacionales en la práctica' },
-    confirmed: true,
-  },
-  {
-    name: 'Database design',
-    glyph: 'ER',
-    category: 'databases',
-    note: { en: 'Entities, relationships and normalization', es: 'Entidades, relaciones y normalización' },
-    confirmed: true,
-  },
-  {
-    name: 'n8n',
-    glyph: 'n8n',
-    category: 'automation',
-    note: { en: 'Visual workflows that connect services', es: 'Flujos visuales que conectan servicios' },
-    confirmed: true,
-  },
-  {
-    name: 'Workflow automation',
-    glyph: '↻',
-    category: 'automation',
-    note: { en: 'Removing repetitive manual steps', es: 'Eliminar pasos manuales repetitivos' },
-    confirmed: true,
-  },
-  {
-    name: 'Git',
-    glyph: 'Git',
-    category: 'tools',
-    note: { en: 'Version control and clean history', es: 'Control de versiones e historial ordenado' },
-    confirmed: true,
-  },
-  {
-    name: 'GitHub',
-    glyph: 'GH',
-    category: 'tools',
-    note: { en: 'Repositories and collaboration', es: 'Repositorios y colaboración' },
-    confirmed: true,
-  },
+  // Front end
+  { name: 'HTML5', category: 'frontend', usedIn: { en: 'Every web project', es: 'Todos los proyectos web' } },
+  { name: 'CSS3', category: 'frontend', usedIn: { en: 'Space Rides, Undergold, this site', es: 'Space Rides, Undergold, este sitio' } },
+  { name: 'JavaScript', category: 'frontend', usedIn: both('BUNEMA, Undergold') },
+  { name: 'TypeScript', category: 'frontend', usedIn: { en: 'Emirate Scents, TR3S & CO., ARCA FOOD, this site', es: 'Emirate Scents, TR3S & CO., ARCA FOOD, este sitio' } },
+  { name: 'React', category: 'frontend', usedIn: both('Emirate Scents, TR3S & CO., ARCA FOOD, Don Repuestos') },
+  { name: 'Next.js', category: 'frontend', usedIn: both('TR3S & CO.') },
+  { name: 'Tailwind CSS', category: 'frontend', usedIn: both('Emirate Scents, ARCA FOOD, TR3S & CO., Don Repuestos') },
+  { name: 'Three.js', category: 'frontend', usedIn: { en: 'BUNEMA, Emirate Scents, this site', es: 'BUNEMA, Emirate Scents, este sitio' } },
+
+  // Back end
+  { name: 'Node.js', category: 'backend', usedIn: both('Emirate Scents, ARCA FOOD, Don Repuestos') },
+  { name: 'Express', category: 'backend', usedIn: both('Emirate Scents, ARCA FOOD, Don Repuestos') },
+  { name: 'REST APIs', category: 'backend', usedIn: both('Emirate Scents, ARCA FOOD, Don Repuestos') },
+  { name: 'Zod', category: 'backend', usedIn: { en: 'Request validation in three APIs', es: 'Validación de solicitudes en tres APIs' } },
+  { name: 'Java', category: 'backend', usedIn: both('Little Horizons School ERP') },
+  { name: 'Python', category: 'backend', usedIn: both('Community Tool Lending') },
+
+  // Databases
+  { name: 'PostgreSQL', category: 'databases', usedIn: both('Emirate Scents, TR3S & CO., ARCA FOOD, Don Repuestos') },
+  { name: 'Prisma', category: 'databases', usedIn: both('Emirate Scents') },
+  { name: 'Supabase', category: 'databases', usedIn: both('TR3S & CO., ARCA FOOD') },
+  { name: 'MySQL', category: 'databases', usedIn: both('Real Estate DB, Little Horizons School ERP') },
+
+  // Testing
+  { name: 'Vitest', category: 'testing', usedIn: both('Emirate Scents, TR3S & CO., ARCA FOOD, Don Repuestos') },
+  { name: 'Supertest', category: 'testing', usedIn: both('Emirate Scents, ARCA FOOD, Don Repuestos') },
+  { name: 'Playwright', category: 'testing', usedIn: both('Emirate Scents, TR3S & CO.') },
+  { name: 'JUnit 5', category: 'testing', usedIn: both('Little Horizons School ERP') },
+
+  // Tools and platforms
+  { name: 'Git', category: 'tools', usedIn: { en: 'All projects', es: 'Todos los proyectos' } },
+  { name: 'GitHub', category: 'tools', usedIn: { en: 'Repositories, Pages and Actions (CI)', es: 'Repositorios, Pages y Actions (CI)' } },
+  { name: 'Vite', category: 'tools', usedIn: { en: 'Five front ends, including this site', es: 'Cinco frontends, incluido este sitio' } },
+  { name: 'n8n', category: 'tools', usedIn: both('AgendaBot, Don Repuestos') },
+  { name: 'Godot', category: 'tools', usedIn: both('Escape Bucaramanga') },
+  { name: 'GDScript', category: 'tools', usedIn: both('Escape Bucaramanga') },
 ]

@@ -1,13 +1,14 @@
-import { X } from 'lucide-react'
+import { Info, X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import type { Project } from '../data/projects'
 import { useLanguage } from '../i18n/LanguageContext'
 import { ProjectCover } from './ProjectCover'
-import { ProjectLinks, StatusBadge } from './Projects'
+import { ProjectLinks } from './Projects'
 
 /** Native <dialog>: focus trapping, Escape handling and focus return come from the browser. */
 export function ProjectDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
   const { lang, t } = useLanguage()
+  const p = t.projects
   const ref = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
@@ -30,30 +31,41 @@ export function ProjectDialog({ project, onClose }: { project: Project | null; o
     >
       {project && (
         <div className="dialog__panel">
-          <button type="button" className="dialog__close" onClick={onClose} aria-label={t.projects.closeDetails}>
+          <button type="button" className="dialog__close" onClick={onClose} aria-label={p.closeDetails}>
             <X size={20} aria-hidden="true" />
           </button>
           <div className="dialog__media">
-            <ProjectCover project={project} />
+            <ProjectCover project={project} eager />
           </div>
           <div className="dialog__content">
             <div className="project__meta">
               <span className="mono project__kind">{project.kind[lang]}</span>
-              <StatusBadge status={project.status} />
+              <span className="project__category project__category--inline mono">{p.filters[project.categories[0]]}</span>
             </div>
             <h2 id="project-dialog-title" className="dialog__title">
               {project.name}
             </h2>
             <p className="dialog__description">{project.description[lang]}</p>
 
-            <h3 className="dialog__subtitle mono">{t.projects.features}</h3>
+            <dl className="project__facts project__facts--dialog">
+              <div>
+                <dt className="mono">{p.problem}</dt>
+                <dd>{project.problem[lang]}</dd>
+              </div>
+              <div>
+                <dt className="mono">{p.challenge}</dt>
+                <dd>{project.challenge[lang]}</dd>
+              </div>
+            </dl>
+
+            <h3 className="dialog__subtitle mono">{p.features}</h3>
             <ul className="dialog__features">
               {project.features[lang].map((feature) => (
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
 
-            <h3 className="dialog__subtitle mono">{t.projects.tech}</h3>
+            <h3 className="dialog__subtitle mono">{p.tech}</h3>
             <ul className="tag-list">
               {project.tech.map((tech) => (
                 <li key={tech} className="tag mono">
@@ -62,9 +74,14 @@ export function ProjectDialog({ project, onClose }: { project: Project | null; o
               ))}
             </ul>
 
-            {!project.repoUrl && <p className="dialog__note">{t.projects.noLinks}</p>}
+            {(project.demoNote || !project.demoUrl) && (
+              <p className="demo-note">
+                <Info size={15} aria-hidden="true" />
+                {project.demoNote ? project.demoNote[lang] : p.noDemo}
+              </p>
+            )}
             <div className="project__actions">
-              <ProjectLinks project={project} />
+              <ProjectLinks name={project.name} repoUrl={project.repoUrl} demoUrl={project.demoUrl} />
             </div>
           </div>
         </div>

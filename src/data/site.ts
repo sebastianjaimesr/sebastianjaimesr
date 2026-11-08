@@ -8,8 +8,8 @@
 export const site = {
   name: 'Sebastian Jaimes',
   location: 'Bucaramanga, Colombia',
-  /** Approximate city coordinates, used only as a decorative label. */
-  coordinates: '7.1193° N · 73.1227° W',
+  /** Time zone shown next to the availability line (Colombia does not use daylight saving time). */
+  timezone: 'UTC−5',
   email: 'jsrolon01@gmail.com',
   phoneDisplay: '+57 312 442 1564',
   whatsappUrl: 'https://wa.me/573124421564',

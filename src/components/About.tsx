@@ -1,11 +1,11 @@
-import { Database, Globe, Layers, Workflow } from 'lucide-react'
+import { Database, FlaskConical, Globe, Layers } from 'lucide-react'
 import portrait from '../assets/sebastian-jaimes.webp'
 import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { resetTilt, trackSpotlight } from '../lib/spotlight'
 import { SectionHeading } from './SectionHeading'
 
-const THEME_ICONS = [Layers, Database, Workflow, Globe]
+const THEME_ICONS = [Layers, Database, FlaskConical, Globe]
 
 export function About() {
   const { t } = useLanguage()
@@ -30,17 +30,19 @@ export function About() {
             </figure>
           </div>
           <div className="about__body">
-            <p className="about__lead" data-reveal>
-              {a.body}
-            </p>
+            <div className="about__lead" data-reveal>
+              {a.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
             <dl className="about__facts" data-reveal>
               <div>
                 <dt className="mono">{a.facts.based}</dt>
                 <dd>{site.location}</dd>
               </div>
               <div>
-                <dt className="mono">{a.facts.focus}</dt>
-                <dd>{a.facts.focusValue}</dd>
+                <dt className="mono">{a.facts.zone}</dt>
+                <dd>{a.facts.zoneValue}</dd>
               </div>
               <div>
                 <dt className="mono">{a.facts.languages}</dt>

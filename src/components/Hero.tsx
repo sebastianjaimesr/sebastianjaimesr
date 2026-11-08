@@ -1,8 +1,9 @@
-import { ArrowDownRight, MapPin } from 'lucide-react'
+import { ArrowDownRight } from 'lucide-react'
 import { useLayoutEffect, useRef } from 'react'
 import { site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { gsap } from '../lib/gsap'
+import { Availability } from './Availability'
 import type { SceneStatus } from './SceneLayer'
 
 interface HeroProps {
@@ -72,19 +73,16 @@ export function Hero({ sceneStatus: status }: HeroProps) {
                 {t.hero.availability}
               </li>
             )}
-            <li className="hero__location">
-              <MapPin size={16} aria-hidden="true" />
-              {site.location}
-            </li>
           </ul>
+          <Availability className="hero__availability" />
         </div>
 
         <div className="hero__stage" role="img" aria-label={t.hero.sceneLabel}>
           {status !== 'ready' && <div className={`orb-fallback${status === 'failed' ? ' is-static' : ''}`} aria-hidden="true" />}
           <ul className="hero__labels mono" aria-hidden="true">
             <li className="hero__label hero__label--a" data-hero-label>
-              <span>{t.hero.labels.coordinates}</span>
-              {site.coordinates}
+              <span>{t.hero.labels.zone}</span>
+              {t.hero.labels.zoneValue}
             </li>
             <li className="hero__label hero__label--b" data-hero-label>
               <span>{t.hero.labels.stack}</span>

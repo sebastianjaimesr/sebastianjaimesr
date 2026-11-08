@@ -4,6 +4,7 @@ import { mailtoHref, site } from '../data/site'
 import { useLanguage } from '../i18n/LanguageContext'
 import { resetTilt, trackSpotlight } from '../lib/spotlight'
 import { GitHubIcon, LinkedInIcon } from './Icons'
+import { Availability } from './Availability'
 import { SectionHeading } from './SectionHeading'
 
 type CopyState = 'idle' | 'copied' | 'failed'
@@ -69,6 +70,7 @@ export function Contact() {
               {t.hero.availability}
             </p>
           )}
+          <Availability className="contact__availability" />
           <p className="sr-only" role="status" aria-live="polite">
             {copyState === 'copied' ? c.copied : copyState === 'failed' ? c.copyFailed : ''}
           </p>
