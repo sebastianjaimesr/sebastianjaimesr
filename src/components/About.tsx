@@ -21,7 +21,7 @@ export function About() {
                 <span className="portrait__satellite" />
               </span>
               <div className="portrait__frame">
-                <img src={portrait} alt={a.photoAlt} width={640} height={800} loading="lazy" decoding="async" />
+                <img src={portrait} alt={a.photoAlt} width={800} height={1000} loading="lazy" decoding="async" />
               </div>
               <figcaption className="portrait__tag">
                 <strong>{site.name}</strong>

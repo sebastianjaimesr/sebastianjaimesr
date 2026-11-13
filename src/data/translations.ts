@@ -56,7 +56,7 @@ const en = {
     index: '01',
     kicker: 'About me',
     title: 'Building real applications, one layer at a time.',
-    photoAlt: 'Portrait of Sebastian Jaimes smiling, wearing a dark suit and tie',
+    photoAlt: 'Portrait of Sebastian Jaimes in a black suit, white shirt and black tie',
     body: [
       'I am a full-stack developer in training at Campuslands, in Bucaramanga, Colombia, finishing the Software Development Technician program in 2026.',
       'My recent work goes from the interface to the database: a perfume store with a React front end, an Express API, Prisma and PostgreSQL, backed by 196 passing unit and API tests; an online ordering system for a local restaurant; and a sales assistant that answers only with data from a real inventory.',
@@ -295,7 +295,7 @@ const es: Dictionary = {
     index: '01',
     kicker: 'Sobre mí',
     title: 'Construyendo aplicaciones reales, capa por capa.',
-    photoAlt: 'Retrato de Sebastian Jaimes sonriendo, con traje oscuro y corbata',
+    photoAlt: 'Retrato de Sebastian Jaimes con traje negro, camisa blanca y corbata negra',
     body: [
       'Soy desarrollador full-stack en formación en Campuslands, en Bucaramanga, Colombia, y termino el programa Técnico en Desarrollo de Software en 2026.',
       'Mis proyectos recientes van de la interfaz a la base de datos: una tienda de perfumes con frontend en React, API en Express, Prisma y PostgreSQL, respaldada por 196 pruebas unitarias y de API que pasan; un sistema de pedidos en línea para un restaurante local; y un asistente de ventas que solo responde con datos de un inventario real.',
