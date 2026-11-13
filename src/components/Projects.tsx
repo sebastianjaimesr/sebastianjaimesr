@@ -39,7 +39,6 @@ function Featured() {
   const { lang, t } = useLanguage()
   const f = t.projects.featured
   const fp = featuredProject
-  const cs = fp.caseStudy
 
   return (
     <article className="featured card" aria-labelledby="featured-title" data-reveal>
@@ -73,6 +72,16 @@ function Featured() {
             {fp.name}
           </h3>
           <p className="featured__summary">{fp.summary[lang]}</p>
+          <dl className="project__facts featured__facts">
+            <div>
+              <dt className="mono">{t.projects.problem}</dt>
+              <dd>{fp.problem[lang]}</dd>
+            </div>
+            <div>
+              <dt className="mono">{t.projects.challenge}</dt>
+              <dd>{fp.challenge[lang]}</dd>
+            </div>
+          </dl>
           <ul className="tag-list" aria-label={f.stack}>
             {fp.tech.map((tech) => (
               <li key={tech} className="tag mono">
@@ -91,32 +100,11 @@ function Featured() {
       </div>
 
       <div className="case">
-        <div className="case__block">
-          <h4 className="case__label mono">{f.problem}</h4>
-          <p>{cs.problem[lang]}</p>
-        </div>
-        <div className="case__block">
-          <h4 className="case__label mono">{f.solution}</h4>
-          <p>{cs.solution[lang]}</p>
-        </div>
-
-        <div className="case__block case__block--wide">
-          <h4 className="case__label mono">{f.architecture}</h4>
-          <p>{cs.architecture[lang]}</p>
+        <div className="case__block case__block--arch">
           <ArchitectureDiagram title={f.diagramTitle} label={f.diagramLabel} nodes={fp.architectureFlow} notes={fp.architectureNotes[lang]} lang={lang} />
         </div>
-
-        <div className="case__block">
-          <h4 className="case__label mono">{f.challenges}</h4>
-          <ul className="case__list">
-            {cs.challenges[lang].map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="case__block">
+        <div className="case__block case__block--tests">
           <h4 className="case__label mono">{f.testing}</h4>
-          <p>{cs.testing[lang]}</p>
           <dl className="test-stats">
             {fp.testStats.map((stat) => (
               <div key={stat.value + stat.label.en}>
@@ -129,11 +117,6 @@ function Featured() {
             ))}
           </dl>
           <p className="test-stats__caption mono">{f.testsCaption}</p>
-        </div>
-
-        <div className="case__block case__block--wide case__outcome">
-          <h4 className="case__label mono">{f.outcome}</h4>
-          <p>{cs.outcome[lang]}</p>
         </div>
       </div>
     </article>

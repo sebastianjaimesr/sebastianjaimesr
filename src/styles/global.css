@@ -1638,6 +1638,10 @@ html.is-switching-lang .nav__links {
   line-height: 1.65;
 }
 
+.featured__facts {
+  width: 100%;
+}
+
 .featured__actions {
   margin-top: 4px;
   padding-top: 0;
@@ -1902,11 +1906,8 @@ html.is-switching-lang .nav__links {
 }
 
 @media (min-width: 760px) {
-  .case {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .case__block--wide {
-    grid-column: 1 / -1;
+  .case__block--arch .arch {
+    margin: 0;
   }
   .arch__flow {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1938,6 +1939,13 @@ html.is-switching-lang .nav__links {
 @media (min-width: 1024px) {
   .featured__top {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+  .case {
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .case__block--tests .test-stats {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

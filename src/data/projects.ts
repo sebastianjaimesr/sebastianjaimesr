@@ -69,14 +69,9 @@ export interface FeaturedProject {
   imageAlt: Localized
   /** Verified test results, shown as small stats. Numbers come from running the suites locally. */
   testStats: { value: string; label: Localized }[]
-  caseStudy: {
-    problem: Localized
-    solution: Localized
-    architecture: Localized
-    challenges: Localized<string[]>
-    testing: Localized
-    outcome: Localized
-  }
+  /** Same short format as the project cards: one line each. */
+  problem: Localized
+  challenge: Localized
   /** Main request flow, left to right. */
   architectureFlow: ArchitectureNode[]
   /** Side notes drawn under the flow. */
@@ -108,41 +103,13 @@ export const featuredProject: FeaturedProject = {
     { value: '56', label: { en: 'front-end unit tests (Vitest)', es: 'pruebas unitarias del frontend (Vitest)' } },
     { value: '8', label: { en: 'end-to-end specs (Playwright)', es: 'suites end-to-end (Playwright)' } },
   ],
-  caseStudy: {
-    problem: {
-      en: 'A small perfume business sells Arabian, designer and niche fragrances through Instagram and WhatsApp. It needed a catalog customers can search and filter, and a way to receive orders without trusting prices or stock sent by the browser.',
-      es: 'Un pequeño negocio de perfumes vende fragancias árabes, de diseñador y de nicho por Instagram y WhatsApp. Necesitaba un catálogo que los clientes pudieran buscar y filtrar, y una forma de recibir pedidos sin confiar en los precios o el stock que envía el navegador.',
-    },
-    solution: {
-      en: 'A storefront with search, filters, sorting and pagination, product pages, favorites and a persistent cart. Checkout validates the form, the API registers the order, and the customer then sends a prefilled summary over WhatsApp. A separate admin panel manages products, photos, inventory movements and order status.',
-      es: 'Una tienda con búsqueda, filtros, orden y paginación, fichas de producto, favoritos y carrito persistente. El checkout valida el formulario, la API registra el pedido y el cliente envía un resumen prellenado por WhatsApp. Un panel aparte gestiona productos, fotos, movimientos de inventario y estados de pedidos.',
-    },
-    architecture: {
-      en: 'The React single-page app talks to a JSON REST API under /api. Express validates every request with Zod, applies helmet and rate limiting, and calls service functions that use Prisma to read and write PostgreSQL. Admin routes use argon2-hashed passwords and server-side sessions.',
-      es: 'La aplicación React de una sola página se comunica con una API REST en JSON bajo /api. Express valida cada solicitud con Zod, aplica helmet y límites de solicitudes, y llama a servicios que usan Prisma para leer y escribir en PostgreSQL. Las rutas del panel usan contraseñas con hash argon2 y sesiones en el servidor.',
-    },
-    challenges: {
-      en: [
-        'Server-side order validation: the API only accepts product ids and quantities, then recalculates prices and checks stock inside a database transaction.',
-        'Inventory is deducted only when the business confirms an order in the admin panel, and every change is recorded as an inventory movement.',
-        'One codebase, two builds: the API-backed store and a serverless GitHub Pages preview that reproduces filtering and sorting in the browser.',
-        '3D scenes with React Three Fiber that fall back to static content on devices without WebGL or with low frame rates.',
-      ],
-      es: [
-        'Validación de pedidos en el servidor: la API solo acepta ids de producto y cantidades, y recalcula precios y verifica stock dentro de una transacción de base de datos.',
-        'El inventario se descuenta solo cuando el negocio confirma el pedido en el panel, y cada cambio queda como un movimiento de inventario.',
-        'Un código, dos builds: la tienda conectada a la API y una vista previa sin servidor en GitHub Pages que reproduce filtros y orden en el navegador.',
-        'Escenas 3D con React Three Fiber que pasan a contenido estático en dispositivos sin WebGL o con pocos cuadros por segundo.',
-      ],
-    },
-    testing: {
-      en: 'API tests run with Vitest and Supertest against a dedicated PostgreSQL test database; front-end logic (cart, catalog queries, checkout schema, WhatsApp messages) has Vitest unit tests; Playwright specs cover shopping, ordering, the admin panel and axe accessibility checks. A GitHub Actions workflow runs lint, type checks, tests, build and end-to-end tests.',
-      es: 'Las pruebas de la API usan Vitest y Supertest contra una base de datos PostgreSQL de pruebas; la lógica del frontend (carrito, consultas del catálogo, esquema del checkout, mensajes de WhatsApp) tiene pruebas unitarias con Vitest; las suites de Playwright recorren la compra, el pedido, el panel y revisiones de accesibilidad con axe. Un workflow de GitHub Actions ejecuta lint, tipos, pruebas, build y pruebas end-to-end.',
-    },
-    outcome: {
-      en: 'It shows I can design a relational schema, build and secure a REST API, connect it to a typed React front end, and back the whole flow with automated tests at three levels.',
-      es: 'Demuestra que puedo diseñar un esquema relacional, construir y proteger una API REST, conectarla con un frontend React tipado y respaldar todo el flujo con pruebas automáticas en tres niveles.',
-    },
+  problem: {
+    en: 'A perfume business selling through Instagram and WhatsApp needed a searchable catalog and orders the browser cannot tamper with.',
+    es: 'Un negocio de perfumes que vende por Instagram y WhatsApp necesitaba un catálogo con búsqueda y pedidos que el navegador no pueda alterar.',
+  },
+  challenge: {
+    en: 'The API recalculates prices and checks stock inside a database transaction, and a static build runs the same catalog on GitHub Pages.',
+    es: 'La API recalcula precios y verifica stock dentro de una transacción, y un build estático muestra el mismo catálogo en GitHub Pages.',
   },
   architectureFlow: [
     { id: 'client', label: 'React SPA', detail: { en: 'Storefront + admin · Vite · Zustand', es: 'Tienda + panel · Vite · Zustand' } },

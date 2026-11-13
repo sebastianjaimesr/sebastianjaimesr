@@ -43,10 +43,10 @@ describe('project data', () => {
     expect(spaceRides.demoUrl).toBe('https://sebastianjaimesr.github.io/HTML_CSS_Proyecto/')
   })
 
-  it('describes the featured project with the verified stack and a four-step architecture', () => {
+  it('describes the featured project with the verified stack, a four-step architecture and short copy', () => {
     for (const tech of ['Express 5', 'Prisma 7', 'PostgreSQL', 'Vitest', 'Supertest', 'Playwright']) expect(featuredProject.tech).toContain(tech)
     expect(featuredProject.architectureFlow.map((n) => n.label)).toEqual(['React SPA', 'Express API', 'Prisma', 'PostgreSQL'])
-    for (const lang of langs) expect(featuredProject.caseStudy.challenges[lang].length).toBeGreaterThan(0)
+    for (const lang of langs) for (const field of [featuredProject.problem, featuredProject.challenge]) expect(field[lang].trim()).not.toBe('')
   })
 })
 
