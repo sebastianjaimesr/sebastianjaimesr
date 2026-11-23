@@ -1,23 +1,40 @@
 <p align="center">
-  <img src="./assets/terminal.svg" alt="Juan Sebastián Jaimes — full-stack developer, Bucaramanga, Colombia. Open to remote junior roles." width="100%">
+  <img src="./assets/header.svg" width="100%" alt="Juan Sebastián Jaimes — Full-stack developer, Bucaramanga, Colombia. Open to remote roles.">
 </p>
 
-I build web apps end to end: React frontend, Node/Express API, relational database, tests.
-Currently learning Java + Spring Boot at Campuslands.
+### Skills
 
-### Projects
+<img src="./assets/skills.svg" width="100%" alt="Skills: TypeScript, JavaScript, React, HTML5, CSS3, Three.js, GSAP, Vite, Web Components, Node.js, Express, Prisma, REST APIs, Java, Spring Boot (learning), PostgreSQL, MySQL, SQL, Vitest, Supertest, Playwright, GitHub Actions, Git, Vercel, GitHub Pages, n8n, Telegram Bot API, Python">
 
-| | What it is | Built with | |
-|---|---|---|---|
-| **Emirate Scents** | Full-stack perfume store | React 19 · Express 5 · Prisma · PostgreSQL · Vitest · Playwright | [demo](https://sebastianjaimesr.github.io/emirate-scents/) · [code](https://github.com/sebastianjaimesr/emirate-scents) |
-| **AgendaBot** | Telegram productivity assistant | n8n (self-hosted) · Telegram API | [code](https://github.com/sebastianjaimesr/N8N_Proyecto) |
-| **Undergold** | Streetwear store + admin dashboard, no framework | Web Components · ES modules | [code](https://github.com/sebastianjaimesr/E-COMMERCE_Proyecto) |
-| **TR3S & CO** | Business website *(in progress)* | TypeScript · Vercel | [live](https://tr3s-co.vercel.app) · [code](https://github.com/sebastianjaimesr/TR3S-CO-) |
+### Selected work
 
-### Stack
-
-`TypeScript` `React` `Node.js` `Express` `Prisma` `PostgreSQL` `MySQL` `Java` `Python` `n8n`
+<table>
+  <tr>
+    <td width="50%">
+      <a href="https://github.com/sebastianjaimesr/emirate-scents"><img src="./assets/project-emirate-scents.svg" width="100%" alt="Emirate Scents"></a>
+      <p align="center"><a href="https://sebastianjaimesr.github.io/emirate-scents/">Live demo</a> · <a href="https://github.com/sebastianjaimesr/emirate-scents">Source</a></p>
+    </td>
+    <td width="50%">
+      <a href="https://github.com/sebastianjaimesr/N8N_Proyecto"><img src="./assets/project-agendabot.svg" width="100%" alt="AgendaBot"></a>
+      <p align="center"><a href="https://github.com/sebastianjaimesr/N8N_Proyecto">Source</a></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <a href="https://github.com/sebastianjaimesr/E-COMMERCE_Proyecto"><img src="./assets/project-undergold.svg" width="100%" alt="Undergold"></a>
+      <p align="center"><a href="https://github.com/sebastianjaimesr/E-COMMERCE_Proyecto">Source</a></p>
+    </td>
+    <td width="50%">
+      <a href="https://tr3s-co.vercel.app"><img src="./assets/project-tr3s-co.svg" width="100%" alt="TR3S & CO"></a>
+      <p align="center"><a href="https://tr3s-co.vercel.app">Live site</a> · <a href="https://github.com/sebastianjaimesr/TR3S-CO-">Source</a></p>
+    </td>
+  </tr>
+</table>
 
 ### Contact
 
-[LinkedIn](https://www.linkedin.com/in/sebastian-jaimes-1a2259398) · [Portfolio](https://sebastianjaimesr.github.io/sebastianjaimesr/) · [jsrolon01@gmail.com](mailto:jsrolon01@gmail.com)
+<p>
+  <a href="https://www.linkedin.com/in/sebastian-jaimes-1a2259398"><img src="./assets/btn-linkedin.svg" alt="LinkedIn"></a>&nbsp;
+  <a href="mailto:jsrolon01@gmail.com"><img src="./assets/btn-email.svg" alt="jsrolon01@gmail.com"></a>&nbsp;
+  <a href="https://sebastianjaimesr.github.io/sebastianjaimesr/"><img src="./assets/btn-portfolio.svg" alt="Portfolio"></a>
+</p>
