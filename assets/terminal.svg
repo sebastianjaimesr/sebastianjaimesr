@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" role="img" aria-labelledby="t d">
+  <title id="t">Juan Sebastián Jaimes — Full-stack developer</title>
+  <desc id="d">Terminal: whoami, Juan Sebastián Jaimes, full-stack developer, Bucaramanga, Colombia. Projects: emirate-scents, agendabot, undergold, tr3s-co. Status: open to remote junior roles, UTC-5, Spanish native, English B1.</desc>
+  <style>
+    .bg{fill:#0d1117}.bar{fill:#161b22}.b{stroke:#30363d}
+    text{font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:17px}
+    .p{fill:#5ad65a}.c{fill:#e6edf3}.m{fill:#8b949e}.a{fill:#5ad65a;font-weight:700}.h{fill:#e6edf3;font-size:26px;font-weight:700}
+    .l{animation:in .35s ease-out backwards}
+    .l1{animation-delay:.3s}.l2{animation-delay:.9s}.l3{animation-delay:1.3s}
+    .l4{animation-delay:2.1s}.l5{animation-delay:2.6s}.l6{animation-delay:3.4s}.l7{animation-delay:3.9s}.l8{animation-delay:4.5s}
+    @keyframes in{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+    .cur{fill:#5ad65a;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+  </style>
+  <rect class="bg b" x="1" y="1" width="858" height="298" rx="10"/>
+  <path class="bar" d="M11 1h838a10 10 0 0 1 10 10v25H1V11A10 10 0 0 1 11 1z"/>
+  <circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+  <text x="430" y="23" text-anchor="middle" class="m" style="font-size:13px">sebastianjaimesr — zsh</text>
+
+  <g class="l l1"><text x="28" y="72"><tspan class="p">$</tspan><tspan class="c"> whoami</tspan></text></g>
+  <g class="l l2"><text x="28" y="106" class="h">Juan Sebastián Jaimes</text></g>
+  <g class="l l3"><text x="28" y="132" class="m">full-stack developer · Bucaramanga, Colombia</text></g>
+
+  <g class="l l4"><text x="28" y="172"><tspan class="p">$</tspan><tspan class="c"> ls ~/projects</tspan></text></g>
+  <g class="l l5"><text x="28" y="198"><tspan class="a">emirate-scents/</tspan><tspan class="c">   agendabot/   undergold/   tr3s-co/</tspan></text></g>
+
+  <g class="l l6"><text x="28" y="238"><tspan class="p">$</tspan><tspan class="c"> cat status</tspan></text></g>
+  <g class="l l7"><text x="28" y="264"><tspan class="a">open to remote junior roles</tspan><tspan class="m">  ·  UTC−5  ·  ES native · EN B1</tspan></text></g>
+  <g class="l l8"><rect class="cur" x="28" y="276" width="10" height="4"/></g>
+</svg>
