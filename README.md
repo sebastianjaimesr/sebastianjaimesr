@@ -12,7 +12,7 @@ Currently learning Java + Spring Boot at Campuslands.
 | **Emirate Scents** | Full-stack perfume store | React 19 · Express 5 · Prisma · PostgreSQL · Vitest · Playwright | [demo](https://sebastianjaimesr.github.io/emirate-scents/) · [code](https://github.com/sebastianjaimesr/emirate-scents) |
 | **AgendaBot** | Telegram productivity assistant | n8n (self-hosted) · Telegram API | [code](https://github.com/sebastianjaimesr/N8N_Proyecto) |
 | **Undergold** | Streetwear store + admin dashboard, no framework | Web Components · ES modules | [code](https://github.com/sebastianjaimesr/E-COMMERCE_Proyecto) |
-| **TR3S & CO** | Website for a real business *(in progress)* | TypeScript · Vercel | [live](https://tr3s-co.vercel.app) · [code](https://github.com/sebastianjaimesr/TR3S-CO-) |
+| **TR3S & CO** | Business website *(in progress)* | TypeScript · Vercel | [live](https://tr3s-co.vercel.app) · [code](https://github.com/sebastianjaimesr/TR3S-CO-) |
 
 ### Stack
 
@@ -20,4 +20,4 @@ Currently learning Java + Spring Boot at Campuslands.
 
 ### Contact
 
-[LinkedIn](https://www.linkedin.com/in/sebastian-jaimes-1a2259398) · [Portfolio](https://sebastianjaimesr.github.io/sebastianjaimesr/) · jsrolon01@gmail.com
+[LinkedIn](https://www.linkedin.com/in/sebastian-jaimes-1a2259398) · [Portfolio](https://sebastianjaimesr.github.io/sebastianjaimesr/) · [jsrolon01@gmail.com](mailto:jsrolon01@gmail.com)
