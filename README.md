@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/header.svg" width="100%" alt="Juan Sebastián Jaimes — Full-stack developer, Bucaramanga, Colombia. Open to remote roles.">
+  <img src="./assets/header.svg" width="100%" alt="Juan Sebastián Jaimes — Full-stack developer, 18, Bucaramanga, Colombia. Software Development Technician at Campuslands. Spanish (native), English (B1). jsrolon01@gmail.com. Open to remote roles.">
 </p>
 
 ### Skills
